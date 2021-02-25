@@ -115,11 +115,5 @@ tempCodeRunnerFile.py
 
 
 #project specific
-tests
-Planning.md
-h_snippet/*.ui
-deleting_folder
 *.DS_Store
-config/settings.json
-encode.py
-h_snippet_review
+.vscode/settings.json
