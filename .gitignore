@@ -116,4 +116,4 @@ tempCodeRunnerFile.py
 
 #project specific
 *.DS_Store
-src/program/.vscode/*
+src/program/.vscode
