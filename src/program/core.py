@@ -9,3 +9,5 @@ def create_array_random(array_length):
     array = np.random.rand(array_length)
     return array
 
+
+print(np)
