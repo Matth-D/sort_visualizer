@@ -1,3 +1,5 @@
+#!~/Python/virtual_envs/sort_visualizer/bin/python
+
 import numpy as np
 
 
@@ -11,3 +13,5 @@ def create_array_random(array_length):
 
 
 print(np)
+x = create_array_random(12)
+print(x)
