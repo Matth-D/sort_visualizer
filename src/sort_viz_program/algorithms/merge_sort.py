@@ -10,6 +10,8 @@ class MergeSort:
 
     def solve(self):
         array_len = len(self.sort_array)
+        if array_len <= 1:
+            return self.sort_array
 
 
 my_array = np.random.rand(6)
