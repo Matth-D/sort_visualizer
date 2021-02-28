@@ -117,4 +117,4 @@ tempCodeRunnerFile.py
 
 #project specific
 *.DS_Store
-sort_visualizer\src\sort_viz_program\.vscode\
+src/sort_viz_program/.vscode/
