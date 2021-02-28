@@ -6,6 +6,7 @@ __pycache__/
 # IDE
 /.vscode
 /.vscode/
+.vscode
 /.settings
 /.idea
 /.project
@@ -116,4 +117,4 @@ tempCodeRunnerFile.py
 
 #project specific
 *.DS_Store
-src/sort_viz_program/.vscode
+sort_visualizer\src\sort_viz_program\.vscode\
