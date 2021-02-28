@@ -70,7 +70,6 @@ def merge(left, right):
 arr1 = np.array([1, 4, 6, 8, 9])
 arr2 = np.array([2, 3, 5, 6, 9])
 
-print(np)
 # sorted_arr = merge(arr1, arr2)
 
 # print(sorted_arr)
