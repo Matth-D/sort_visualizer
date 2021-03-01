@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1328</width>
+    <height>645</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>40</y>
+      <width>1211</width>
+      <height>581</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="mainlayout" stretch="3,0,1">
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
+     <property name="topMargin">
+      <number>5</number>
+     </property>
+     <property name="rightMargin">
+      <number>5</number>
+     </property>
+     <property name="bottomMargin">
+      <number>5</number>
+     </property>
+     <item>
+      <widget class="QWidget" name="widget" native="true">
+       <property name="styleSheet">
+        <string notr="true">background-color:teal</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="layouth1">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QComboBox" name="comboBox">
+           <property name="maximumSize">
+            <size>
+             <width>400</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="currentText">
+            <string>algo1</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>algo1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>algo2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>algo3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>algo4</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Sort</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Reset</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="layoutv1">
+         <item>
+          <widget class="QLabel" name="INFOS">
+           <property name="text">
+            <string>INFOS:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="spacecomplexity_3">
+           <property name="text">
+            <string>array length:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="spacecomplexity_2">
+           <property name="text">
+            <string>iterations: 50</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="timecomplexity">
+           <property name="text">
+            <string>time complexity : O(nlogn)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="spacecomplexity">
+           <property name="text">
+            <string>space complexity : O(n)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
