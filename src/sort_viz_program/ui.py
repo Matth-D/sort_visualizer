@@ -2,6 +2,8 @@ import sys
 
 from PySide2 import QtCore, QtGui, QtWidgets
 
+print(QtCore)
+
 
 class SortVisualizer(QtWidgets.QDialog):
     def __init__(self):
