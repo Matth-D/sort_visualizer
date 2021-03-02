@@ -2,8 +2,6 @@ import sys
 
 from PySide2 import QtCore, QtGui, QtWidgets
 
-print(QtCore)
-
 
 class SortVisualizer(QtWidgets.QDialog):
     def __init__(self):
@@ -48,7 +46,6 @@ class SortVisualizer(QtWidgets.QDialog):
         self.time_complexity_label = QtWidgets.QLabel("Time Complexity:")
         self.space_complexity_label = QtWidgets.QLabel("Space Complexity:")
 
-        # TODO: Figure the stretching shite
         # Populate Layout
         self.setLayout(self.main_layout)
         self.main_layout.addWidget(self.array_viewer)
@@ -56,13 +53,16 @@ class SortVisualizer(QtWidgets.QDialog):
         self.main_layout.addLayout(self.layout_h1)
 
         self.layout_h1.addLayout(self.layout_v1)
+        self.layout_h1.setSpacing(25)
         self.layout_v1.addWidget(self.algorithm_list)
-        # self.layout_v1.addItem(self.vertical_spacer1)
+        self.layout_v1.addItem(self.vertical_spacer1)
         self.layout_h1.addLayout(self.layout_v2)
         self.layout_v2.addLayout(self.layout_h2)
 
         self.layout_h2.addWidget(self.sort_button)
         self.layout_h2.addWidget(self.reset_button)
+        self.layout_h2.setSpacing(27)
+        self.layout_v2.addItem(self.vertical_spacer1)
 
         self.layout_h1.addLayout(self.layout_v3)
         self.layout_v3.addWidget(self.infos_label)
@@ -72,6 +72,14 @@ class SortVisualizer(QtWidgets.QDialog):
         self.layout_v3.addWidget(self.space_complexity_label)
 
         self.main_layout.setStretch(0, 3)
+        self.main_layout.setStretch(2, 1)
+
+        # Appearence
+        self.sort_button.setMinimumHeight(self.app_size[0] * 0.07)
+        self.sort_button.setMaximumWidth(self.app_size[0] * 0.07)
+        self.reset_button.setMinimumHeight(self.app_size[0] * 0.07)
+        self.reset_button.setMaximumWidth(self.app_size[0] * 0.07)
+        self.algorithm_list.setMaximumWidth(self.app_size[0] * 0.25)
 
     def center_window(self):
         """Centers window on screen."""
