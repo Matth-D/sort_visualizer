@@ -14,8 +14,8 @@ class SortVisualizer(QtWidgets.QDialog):
     def init_ui(self):
         self.screen_size = QtGui.QGuiApplication.primaryScreen().availableGeometry()
         self.app_size = (
-            round(self.screen_size.width() * 0.4),
-            round(self.screen_size.height() * 0.5),
+            round(self.screen_size.width() * 0.6),
+            round(self.screen_size.height() * 0.54),
         )
         # Create Widgets
         self.main_layout = QtWidgets.QVBoxLayout()
@@ -68,6 +68,8 @@ class SortVisualizer(QtWidgets.QDialog):
         self.layout_v3.addWidget(self.iterations_label)
         self.layout_v3.addWidget(self.time_complexity_label)
         self.layout_v3.addWidget(self.space_complexity_label)
+
+        self.main_layout.setStretch(0, 3)
 
     def center_window(self):
         """Centers window on screen."""
