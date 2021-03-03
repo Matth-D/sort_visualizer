@@ -1,6 +1,35 @@
 import sys
 
 from PySide2 import QtCore, QtGui, QtWidgets
+import matplotlib.backends.backend_qt5agg as beqt5agg
+import matplotlib.figure as mpltfig
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
+    def __init__(self, default_array_length):
+        self.fig = plt.figure()
+        # self.ax = self.fig.add_subplot(111)
+        self.ax = self.fig.add_axes([0, 1], [0, 1])
+        self.x = np.arange(default_array_length)
+        self.y = np.random.rand(default_array_length)
+        self.plot_graph()
+        super(ArrayGraph, self).__init__(self.fig)
+
+    def plot_graph(self):
+        self.ax.bar(self.x, self.y, width=0.1)
+
+    # def plot_values(self, value_range):
+    #     # self.fig.clear()
+    #     self.x = np.arange(value_range)
+    #     self.y = np.random.rand(value_range)
+    #     self.fig.canvas.draw()
+    #     self.fig.canvas.flush_events()
+    #     self.update()
+    # self.plot_graph()
+    # self.show()
+    # return x, y
 
 
 class SortVisualizer(QtWidgets.QDialog):
@@ -20,8 +49,9 @@ class SortVisualizer(QtWidgets.QDialog):
         # Create Widgets
         self.main_layout = QtWidgets.QVBoxLayout()
 
-        self.array_viewer = QtWidgets.QWidget()
-        self.array_viewer.setStyleSheet("background-color:teal")
+        default_array_length = 15
+        self.array_graph = ArrayGraph(default_array_length)
+        # self.array_viewer.setStyleSheet("background-color:teal")
         self.array_length_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal, self)
 
         self.layout_h1 = QtWidgets.QHBoxLayout()
@@ -46,9 +76,9 @@ class SortVisualizer(QtWidgets.QDialog):
         self.time_complexity_label = QtWidgets.QLabel("Time Complexity:")
         self.space_complexity_label = QtWidgets.QLabel("Space Complexity:")
 
-        # Populate Layout
+        # Arrange Layout
         self.setLayout(self.main_layout)
-        self.main_layout.addWidget(self.array_viewer)
+        self.main_layout.addWidget(self.array_graph)
         self.main_layout.addWidget(self.array_length_slider)
         self.main_layout.addLayout(self.layout_h1)
 
@@ -81,6 +111,10 @@ class SortVisualizer(QtWidgets.QDialog):
         self.reset_button.setMaximumWidth(self.app_size[0] * 0.07)
         self.algorithm_list.setMaximumWidth(self.app_size[0] * 0.25)
 
+        # Connects
+        self.array_length_slider.setValue(default_array_length)
+        # self.array_length_slider.valueChanged.connect(self.array_graph.plot_values)
+
     def center_window(self):
         """Centers window on screen."""
         app_geo = self.frameGeometry()
@@ -100,4 +134,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # app = QtWidgets.QApplication(sys.argv)
+    # graph = ArrayGraph()
+    # graph.show()
+    # sys.exit(app.exec_())
     main()
+

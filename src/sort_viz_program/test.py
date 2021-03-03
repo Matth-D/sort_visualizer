@@ -1,19 +1,25 @@
+import sys
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = np.random.randint(low=1, high=11, size=50)
-y = x + np.random.randint(1, 5, size=x.size)
-data = np.column_stack((x, y))
+# x = np.linspace(0, 6 * np.pi, 100)
+# y = np.sin(x)
 
-fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(8, 4))
+# # You probably won't need this if you're embedding things in a tkinter plot...
+# plt.ion()
 
-ax1.scatter(x=x, y=y, marker="o", c="r", edgecolor="b")
-ax1.set_title("Scatter: $x$ versus $y$")
-ax1.set_xlabel("$x$")
-ax1.set_ylabel("$y$")
+# fig = plt.figure()
+# ax = fig.add_subplot(111)
+# (line1,) = ax.plot(x, y, "r-")  # Returns a tuple of line objects, thus the comma
 
-ax2.hist(data, bins=np.arange(data.min(), data.max()), label=("x", "y"))
-ax2.legend(loc=(0.65, 0.8))
-ax2.set_title("Frequencies of $x$ and $y$")
-ax2.yaxis.tick_right()
-
+# for phase in np.linspace(0, 10 * np.pi, 500):
+#     line1.set_ydata(np.sin(x + phase))
+#     fig.canvas.draw()
+#     fig.canvas.flush_events()
+fig, ax = plt.subplots()
+density = 30
+x = np.arange(density)
+y = np.random.rand(density)
+ax.bar(x, y)
+plt.show()
