@@ -50,29 +50,3 @@ class MergeSort:
 # print("----")
 # algo.solve()
 # print(algo.sort_array)
-
-
-# def merge(left, right):
-#     merged_array = np.empty(0)
-#     while left.size and right.size:
-#         if left[0] >= right[0]:
-#             merged_array = np.append(merged_array, right[0])
-#             right = np.delete(right, 0)
-#             continue
-#         if left[0] < right[0]:
-#             merged_array = np.append(merged_array, left[0])
-#             left = np.delete(left, 0)
-#             continue
-#     if not left.size:
-#         merged_array = np.append(merged_array, right)
-#     if not right.size:
-#         merged_array = np.append(merged_array, left)
-#     return merged_array
-
-
-# arr1 = np.array([1, 4, 6, 8, 9])
-# arr2 = np.array([2, 3, 5, 6, 9])
-
-# # sorted_arr = merge(arr1, arr2)
-
-# # print(sorted_arr)

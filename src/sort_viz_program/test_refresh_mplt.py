@@ -8,20 +8,23 @@ import numpy as np
 
 
 class Graph(beqt5agg.FigureCanvasQTAgg):
-    def __init__(self):
-        self.fig, self.ax = plt.subplots()
+    def __init__(self, parent=None):
+        self.fig, self.ax = plt.subplots(figsize=(10, 10), constrained_layout=True)
         super(Graph, self).__init__(self.fig)
-        self.x = np.arange(1)
-        self.y = np.random.rand(1)
-        self.ax.bar(self.x, self.y)
+        self.setParent(parent)
+        self.set_graph_density()
+        # self.y = np.round(np.random.rand(1), decimals=3)
+        # self.x = np.arange(len(self.y))
+        # self.ax.bar(self.x, self.y)
+        # self.ax.axis("off")
 
-    def update_graph(self, slider_value):
-        self.x = np.arange(slider_value)
-        self.y = np.random.rand(slider_value)
+    def set_graph_density(self, density=6):
+        self.y = np.round(np.random.rand(density), decimals=3)
+        self.x = np.arange(len(self.y))
         self.ax.clear()
         self.ax.bar(self.x, self.y)
+        self.ax.axis("off")
         self.draw()
-        pass
 
 
 class SortVisualizer(QtWidgets.QDialog):
@@ -42,14 +45,14 @@ class SortVisualizer(QtWidgets.QDialog):
         self.main_layout = QtWidgets.QVBoxLayout()
         # self.graph = QtWidgets.QWidget(self)
         # self.graph.setStyleSheet("background-color:red")
-        self.graph = Graph()
+        self.graph = Graph(self)
         # self.button = QtWidgets.QPushButton("Add", self)
         self.slider = QtWidgets.QSlider(QtCore.Qt.Horizontal, self)
         self.setLayout(self.main_layout)
         self.main_layout.addWidget(self.graph)
         self.main_layout.addWidget(self.slider)
 
-        self.slider.valueChanged.connect(self.graph.update_graph)
+        self.slider.valueChanged.connect(self.graph.set_graph_density)
         # self.button.clicked.connect(self.graph.increase_density)
         # self.button.clicked.connect(self.graph.update_graph)
 
