@@ -1,4 +1,7 @@
 import numpy as np
+from . import algo_utils
+
+print(algo_utils)
 
 
 class MergeSort:
@@ -29,6 +32,8 @@ class MergeSort:
         merged_array = np.empty(0)
         while left.size and right.size:
             if left[0] >= right[0]:
+                print("left:", left, "left[0]:", left[0])
+                print("right:", right, "right[-1]:", right[-1])
                 merged_array = np.append(merged_array, right[0])
                 right = np.delete(right, 0)
                 continue
@@ -43,10 +48,8 @@ class MergeSort:
         return merged_array
 
 
-# my_array = np.random.rand(7)
-# my_array = my_array.round(decimals=3)
-# algo = MergeSort(my_array)
-# print(my_array)
-# print("----")
-# algo.solve()
-# print(algo.sort_array)
+arr1 = np.array([3, 2, 8, 1, 2, 9, 1])
+algo = MergeSort(arr1)
+algo.solve()
+result = algo.sort_array
+print(result)
