@@ -35,7 +35,7 @@ class SortVisualizer(QtWidgets.QDialog):
         self.screen_size = QtGui.QGuiApplication.primaryScreen().availableGeometry()
         self.app_size = (
             round(self.screen_size.width() * 0.6),
-            round(self.screen_size.height() * 0.54),
+            round(self.screen_size.height() * 0.6),
         )
         # Create Widgets
         self.main_layout = QtWidgets.QVBoxLayout()
@@ -130,4 +130,3 @@ if __name__ == "__main__":
     # graph.show()
     # sys.exit(app.exec_())
     main()
-
