@@ -70,6 +70,7 @@ arr1 = core.create_array_random(10)
 # print(empty)
 # result = np.append(empty, extract)
 
+print(arr1)
 algo = MergeSort(arr1)
 algo.solve()
 result = algo.sort_array
