@@ -51,20 +51,23 @@ class MergeSort:
             if left[0][1] >= right[0][1]:
                 merged_array = np.vstack((merged_array, right[0]))
                 right = np.delete(right, 0, axis=0)
-                slice_array[0 : len(merged_array)] = merged_array
+                print("first while")
+                # slice_array[0 : len(merged_array)] = merged_array
                 continue
             if left[0][1] < right[0][1]:
                 merged_array = np.vstack((merged_array, left[0]))
                 left = np.delete(left, 0, axis=0)
-                slice_array[0 : len(merged_array)] = merged_array
+                print("second while")
+                # slice_array[0 : len(merged_array)] = merged_array
                 continue
         if not left.size:
             merged_array = np.vstack((merged_array, right))
-            slice_array[0 : len(merged_array)] = merged_array
+            print("first if")
+            # slice_array[0 : len(merged_array)] = merged_array
         if not right.size:
             merged_array = np.vstack((merged_array, left))
-            slice_array[0 : len(merged_array)] = merged_array
-        print(slice_array)
+            print("second if")
+            # slice_array[0 : len(merged_array)] = merged_array
         print("----")
         # print(self.sort_array[left_index:right_index])
         # print("merged:", merged_array)
