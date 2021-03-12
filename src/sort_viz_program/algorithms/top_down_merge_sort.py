@@ -20,20 +20,20 @@ class MergeSort:
         self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(n)"
         self.input_array = input_array
-        self.sort_array = input_array
+        self.sort_array = self.input_array.copy()
         self.inf = float("inf")
 
     def solve(self):
         self.input_array = self.divide(self.input_array)
         return
 
-    def divide(self, sort_array):
-        if len(sort_array) <= 1:
-            return sort_array
-        mid = len(sort_array) // 2
+    def divide(self, input_array):
+        if len(input_array) <= 1:
+            return input_array
+        mid = len(input_array) // 2
 
-        array_left = sort_array[:mid]
-        array_right = sort_array[mid:]
+        array_left = input_array[:mid]
+        array_right = input_array[mid:]
 
         array_left = self.divide(array_left)
         array_right = self.divide(array_right)
@@ -53,59 +53,47 @@ class MergeSort:
         right_index = int(right[-1][0])
 
         slice_array = np.vstack((left, right))
-        slice_array[0 : len(merged_array)] = merged_array
-        slice_array[:, 0] = np.arange(left_index, right_index + 1)
-        print("left:", left)
-        print("right:", right)
-        # print(compare_array.shape)
         while left.size and right.size:
             if left[0][1] >= right[0][1]:
                 merged_array = np.vstack((merged_array, right[0]))
                 right = np.delete(right, 0, axis=0)
                 slice_array[0 : len(merged_array)] = merged_array
                 slice_array[:, 0] = np.arange(left_index, right_index + 1)
-                print("merged_array:", merged_array)
-                print("slice_array:", slice_array)
-
                 self.sort_array[left_index : right_index + 1] = slice_array
-                # print(self.sort_array)
-                # self.sort_array[:, 0] = np.arange(len(self.sort_array))
+                self.sort_array[:, 0] = np.arange(len(self.sort_array))
                 continue
             if left[0][1] < right[0][1]:
                 merged_array = np.vstack((merged_array, left[0]))
                 left = np.delete(left, 0, axis=0)
                 slice_array[0 : len(merged_array)] = merged_array
                 slice_array[:, 0] = np.arange(left_index, right_index + 1)
-                # self.sort_array[left_index : right_index + 1] = slice_array
-                # print(self.sort_array)
-                # self.sort_array[:, 0] = np.arange(len(self.sort_array))
+                self.sort_array[left_index : right_index + 1] = slice_array
+                self.sort_array[:, 0] = np.arange(len(self.sort_array))
                 continue
         if not left.size:
             merged_array = np.vstack((merged_array, right))
             slice_array[0 : len(merged_array)] = merged_array
             slice_array[:, 0] = np.arange(left_index, right_index + 1)
             self.sort_array[left_index : right_index + 1] = slice_array
-            # print(self.sort_array)
-            # self.sort_array[:, 0] = np.arange(len(self.sort_array))
+            self.sort_array[:, 0] = np.arange(len(self.sort_array))
         if not right.size:
             merged_array = np.vstack((merged_array, left))
             slice_array[0 : len(merged_array)] = merged_array
             slice_array[:, 0] = np.arange(left_index, right_index + 1)
             self.sort_array[left_index : right_index + 1] = slice_array
-            # print(self.sort_array)
-            # self.sort_array[:, 0] = np.arange(len(self.sort_array))
+            self.sort_array[:, 0] = np.arange(len(self.sort_array))
+
         merged_array[:, 0] = np.arange(left_index, right_index + 1)
-        print("----")
         return merged_array
 
 
-# values = np.array([3, 2, 1, 8, 5, 9])
-# index = np.array(range(len(values)))
+values = np.array([3, 2, 1, 8, 5, 9])
+index = np.array(range(len(values)))
 
-# arr1 = np.column_stack((index, values))
-arr1 = core.create_array_random(10)
+arr1 = np.column_stack((index, values))
+# arr1 = core.create_array_random(10)
 arr2 = arr1.copy()
 algo = MergeSort(arr1)
 algo.solve()
-print(algo.sort_array)
-print("base array:", arr2)
+# print(algo.sort_array)
+# print("base array:", arr2)
