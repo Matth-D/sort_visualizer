@@ -47,9 +47,6 @@ class MergeSort:
         right_index = int(right[-1][0])
 
         slice_array = np.vstack((left, right))
-        print(slice_array)
-        print("-")
-
         # print(compare_array.shape)
         while left.size and right.size:
             if left[0][1] >= right[0][1]:
@@ -57,9 +54,8 @@ class MergeSort:
                 right = np.delete(right, 0, axis=0)
                 slice_array[0 : len(merged_array)] = merged_array
                 slice_array[:, 0] = np.arange(left_index, right_index + 1)
-                print(slice_array)
                 # self.sort_array[left_index : right_index + 1] = slice_array
-                # print(self.sort_array)
+                print(self.sort_array)
                 # self.sort_array[:, 0] = np.arange(len(self.sort_array))
                 continue
             if left[0][1] < right[0][1]:
@@ -67,7 +63,7 @@ class MergeSort:
                 left = np.delete(left, 0, axis=0)
                 slice_array[0 : len(merged_array)] = merged_array
                 slice_array[:, 0] = np.arange(left_index, right_index + 1)
-                print(slice_array)
+                print(self.sort_array)
                 # self.sort_array[left_index : right_index + 1] = slice_array
                 # self.sort_array[:, 0] = np.arange(len(self.sort_array))
                 continue
@@ -75,15 +71,15 @@ class MergeSort:
             merged_array = np.vstack((merged_array, right))
             slice_array[0 : len(merged_array)] = merged_array
             slice_array[:, 0] = np.arange(left_index, right_index + 1)
-            print(slice_array)
+            print(self.sort_array)
             # self.sort_array[left_index : right_index + 1] = slice_array
             # self.sort_array[:, 0] = np.arange(len(self.sort_array))
         if not right.size:
             merged_array = np.vstack((merged_array, left))
             slice_array[0 : len(merged_array)] = merged_array
             slice_array[:, 0] = np.arange(left_index, right_index + 1)
-            print(slice_array)
-            # self.sort_array[left_index : right_index + 1] = slice_array
+            self.sort_array[left_index : right_index + 1] = slice_array
+            print(self.sort_array)
             # self.sort_array[:, 0] = np.arange(len(self.sort_array))
         merged_array[:, 0] = np.arange(left_index, right_index + 1)
         print("----")
@@ -96,41 +92,7 @@ index = np.array(range(len(values)))
 arr1 = np.column_stack((index, values))
 
 algo = MergeSort(arr1)
-# algo.solve()
-arr1 = np.array([[0, 5], [1, 4], [2, 3], [3, 8], [4, 5]])
-arr2 = np.array([[2, 99], [3, 99]])
-li = arr2[0][0]
-ri = arr2[-1][0]
-arr1[li : ri + 1] = arr2
-print(arr1)
+algo.solve()
+print(algo.sort_array)
 
-# TODO FINISH SORTING THIS FUCKING SHIT SO I CAN MOVE ON TO SMTH ELSE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
-# print(np.arange(0, 1))
-# print(algo.sort_array)
-
-
-# list1 = np.array([[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]])
-# list2 = np.array([[8, 8], [9, 9]])
-# left_index = int(list1[0][0])
-# right_index = 1
-
-# list1[left_index:right_index] = list2
-# print(list1)
-
-# backup merge
-# def merge(self, left, right):
-#     merged_array = np.empty(0)
-#     while left.size and right.size:
-#         if left[0] >= right[0]:
-#             merged_array = np.append(merged_array, right[0])
-#             right = np.delete(right, 0)
-#             continue
-#         if left[0] < right[0]:
-#             merged_array = np.append(merged_array, left[0])
-#             left = np.delete(left, 0)
-#             continue
-#     if not left.size:
-#         merged_array = np.append(merged_array, right)
-#     if not right.size:
-#         merged_array = np.append(merged_array, left)
-#     return merged_array
+# TODO shit sorted? run bigger tests, cool cool cool and wrap up update sort array
