@@ -138,7 +138,6 @@ class SortVisualizer(QtWidgets.QDialog):
         # Connects
         self.density_slider.valueChanged.connect(self.array_graph.set_graph_density)
         self.algorithm_list.currentTextChanged.connect(self.array_graph.set_algorithm)
-        self.sort_button.clicked.connect(self.array_graph.solve_algorithm)
         self.density_slider.setMinimum(1)
         self.density_slider.setMaximum(300)
         self.density_slider.setValue(10)
