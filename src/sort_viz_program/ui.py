@@ -14,14 +14,6 @@ import numpy as np
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
     def __init__(self):
         self.fig, self.ax = plt.subplots(figsize=(2, 2), constrained_layout=True)
-        self.algorithms_list = [
-            "Top Down Merge Sort",
-            "Bubble Sort",
-            "Heap Sort",
-            "Insert Sort",
-        ]
-        self.algorithm_value = self.algorithms_list[0]
-        self.algorithm = None
         super(ArrayGraph, self).__init__(self.fig)
         self.sort_array = core.create_array_random(10)
         self.set_graph_density()
@@ -46,6 +38,14 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
 class SortVisualizer(QtWidgets.QDialog):
     def __init__(self):
         super(SortVisualizer, self).__init__()
+        self.algorithms_list = [
+            "Top Down Merge Sort",
+            "Bubble Sort",
+            "Heap Sort",
+            "Insert Sort",
+        ]
+        self.algorithm_value = self.algorithms_list[0]
+        self.algorithm = None
         self.init_ui()
         self.setGeometry(300, 300, self.app_size[0], self.app_size[1])
         self.setWindowTitle("Sort Visualizer")
