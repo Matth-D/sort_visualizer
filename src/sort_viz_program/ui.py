@@ -35,6 +35,9 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         self.draw()
         self.update()
 
+    def update_graph_data(self):
+        pass
+
     def set_algorithm(self, value):
         self.algorithm_value = value
         algorithm_arg = self.input_array
