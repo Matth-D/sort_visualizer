@@ -83,9 +83,14 @@ class MergeSort:
 
 # arr1 = np.column_stack((index, values))
 arr1 = core.create_array_random(10)
+x = arr1[:, 0]
+y = arr1[:, 1]
+print(arr1)
+print(x)
+print(y)
 # print(arr1)
-arr2 = arr1.copy()
-algo = MergeSort(arr1)
-algo.solve()
+# arr2 = arr1.copy()
+# algo = MergeSort(arr1)
+# algo.solve()
 # print(algo.sort_array)
 # print("base array:", arr2)

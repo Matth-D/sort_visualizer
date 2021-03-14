@@ -1,26 +1,46 @@
 import sys
 
 from PySide2 import QtCore, QtGui, QtWidgets
-from algorithms import top_down_merge_sort
+import algorithms.top_down_merge_sort as top_down_merge_sort
+import core
 import matplotlib.backends.backend_qt5agg as beqt5agg
 import matplotlib.figure as mpltfig
 import matplotlib.pyplot as plt
 import numpy as np
 
+# from .algorithms import top_down_merge_sort
+
 
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
     def __init__(self):
-        self.fig, self.ax = plt.subplots(figsize=(10, 10), constrained_layout=True)
+        self.fig, self.ax = plt.subplots(figsize=(2, 2), constrained_layout=True)
+        self.algorithms_list = [
+            "Top Down Merge Sort",
+            "Bubble Sort",
+            "Heap Sort",
+            "Insert Sort",
+        ]
+        self.algorithm_value = self.algorithms_list[0]
+        self.algorithm = None
         super(ArrayGraph, self).__init__(self.fig)
+        self.sort_array = core.create_array_random(10)
         self.set_graph_density()
 
     def set_graph_density(self, density=10):
-        self.y = np.round(np.random.rand(density), decimals=3)
-        self.x = np.arange(len(self.y))
+        self.sort_array = core.create_array_random(density)
+        # self.y = np.round(np.random.rand(density), decimals=3)
+        # self.x = np.arange(len(self.y))
+        # self.x = self.sort_array
+        x = self.sort_array[:, 0]
+        y = self.sort_array[:, 1]
         self.ax.clear()
-        self.ax.bar(self.x, self.y)
+        self.ax.bar(x, y)
         self.ax.axis("off")
         self.draw()
+
+    def set_algorithm(self, value):
+        self.algorithm_value = value
+        print(self.algorithm_value)
 
 
 class SortVisualizer(QtWidgets.QDialog):
@@ -47,6 +67,7 @@ class SortVisualizer(QtWidgets.QDialog):
 
         self.layout_v1 = QtWidgets.QVBoxLayout()
         self.algorithm_list = QtWidgets.QComboBox()
+        self.algorithm_list.addItems(self.algorithms_list)
         self.vertical_spacer1 = QtWidgets.QSpacerItem(
             20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
         )
@@ -102,8 +123,9 @@ class SortVisualizer(QtWidgets.QDialog):
 
         # Connects
         self.density_slider.valueChanged.connect(self.array_graph.set_graph_density)
+        self.algorithm_list.currentTextChanged.connect(self.set_algorithm)
         self.density_slider.setMinimum(1)
-        self.density_slider.setMaximum(200)
+        self.density_slider.setMaximum(300)
         self.density_slider.setValue(10)
 
     def center_window(self):
