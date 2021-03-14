@@ -3,11 +3,11 @@ import sys
 
 import numpy as np
 
-core_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-if core_path not in sys.path:
-    sys.path.append(core_path)
+# core_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+# if core_path not in sys.path:
+#     sys.path.append(core_path)
 
-import sort_viz_program.core as core
+# import sort_viz_program.core as core
 
 
 class MergeSort:
@@ -39,7 +39,6 @@ class MergeSort:
 
         self.sort_array[left_index : right_index + 1] = slice_array
         self.sort_array[:, 0] = np.arange(len(self.sort_array))
-        print(self.sort_array)
 
     def merge(self, left, right):
         merged_array = np.empty((0, 2))
@@ -82,12 +81,12 @@ class MergeSort:
 # index = np.array(range(len(values)))
 
 # arr1 = np.column_stack((index, values))
-arr1 = core.create_array_random(10)
-x = arr1[:, 0]
-y = arr1[:, 1]
-print(arr1)
-print(x)
-print(y)
+# arr1 = core.create_array_random(10)
+# x = arr1[:, 0]
+# y = arr1[:, 1]
+# print(arr1)
+# print(x)
+# print(y)
 # print(arr1)
 # arr2 = arr1.copy()
 # algo = MergeSort(arr1)
