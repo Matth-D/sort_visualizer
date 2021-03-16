@@ -1,12 +1,13 @@
 import random
 import sys
 
-from PySide2 import QtCore, QtGui, QtWidgets
 import matplotlib
+
+matplotlib.use("Qt5Agg")
+
+from PySide2 import QtCore, QtWidgets
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-
-# matplotlib.use("Qt5Agg")
 
 
 class MplCanvas(FigureCanvas):
@@ -36,7 +37,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Setup a timer to trigger the redraw by calling update_plot.
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(10)
+        self.timer.setInterval(100)
         self.timer.timeout.connect(self.update_plot)
         self.timer.start()
 
