@@ -6,32 +6,36 @@ import matplotlib.figure as mpltfig
 import matplotlib.pyplot as plt
 import numpy as np
 
+# TODO Finish Case Study with mdev/custom_signal_algo_update exemple and figure out if update works with matplotlib
+
+
+class Signals(QtCore.QObject):
+    signal_print = QtCore.Signal(int)
+
 
 class FakeAlgo:
-    def __init__(self, start_value):
-        self.start_value = start_value
+    def __init__(self, start_array):
+        self.start_array = start_array
+        self.data_array = self.start_array.copy()
 
     def solve(self):
-        while self.start_value > 0:
-            self.start_value -= 0.05
-            print(self.start_value)
-        # send signal refresh
+        for i in range(10):
+            self.data_array *= 0.95
 
 
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
-    def __init__(self):
+    def __init__(self, range_value):
         self.fig, self.ax = plt.subplots(figsize=(2, 2), constrained_layout=True)
         super(ArrayGraph, self).__init__(self.fig)
-        self.set_graph_density()
+        self.range_value = range_value
+        self.init_graph(range_value)
 
-    def set_graph_density(self):
-        x = 1
-        y = 1
-        self.ax.clear()
+    def init_graph(self):
+        x = np.arange(self.range_value)
+        y = np.round(np.random.rand(len(self.range_value)), decimals=3)
         self.ax.bar(x, y)
         self.ax.axis("off")
         self.draw()
-        self.update()
 
 
 class SortVisualizer(QtWidgets.QDialog):
@@ -51,8 +55,10 @@ class SortVisualizer(QtWidgets.QDialog):
         # Create Widgets
         self.main_layout = QtWidgets.QVBoxLayout()
 
-        self.array_graph = ArrayGraph()
+        range_value = 10
+        self.array_graph = ArrayGraph(10)
         self.solve_button = QtWidgets.QPushButton("SOLVE", self)
+
         # Arrange Layout
         self.setLayout(self.main_layout)
         self.main_layout.addWidget(self.array_graph)
