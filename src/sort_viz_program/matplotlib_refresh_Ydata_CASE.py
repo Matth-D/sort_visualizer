@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # TODO Finish Case Study with mdev/custom_signal_algo_update exemple and figure out if update works with matplotlib
+# Reference: matplotlib_refreshYdata_EXAMPLE / custom_signals_algo_update
 
 
 class Signals(QtCore.QObject):
@@ -20,19 +21,27 @@ class FakeAlgo:
 
     def solve(self):
         for i in range(10):
-            self.data_array *= 0.95
+            self.data_array[0] *= 0.95
+            print(self.data_array)
 
 
-class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
+class Graph(beqt5agg.FigureCanvasQTAgg):
     def __init__(self, range_value):
         self.fig, self.ax = plt.subplots(figsize=(2, 2), constrained_layout=True)
-        super(ArrayGraph, self).__init__(self.fig)
+        super(Graph, self).__init__(self.fig)
         self.range_value = range_value
-        self.init_graph(range_value)
+        self.random_array = self.create_array_random(self.range_value)
+        self.init_graph()
+        self.algorithm = FakeAlgo(self.random_array[1])
+
+    def create_array_random(self, density):
+        x = np.arange(density)
+        y = np.round(np.random.rand(density), decimals=3)
+        return x, y
 
     def init_graph(self):
-        x = np.arange(self.range_value)
-        y = np.round(np.random.rand(len(self.range_value)), decimals=3)
+        x = self.random_array[0]
+        y = self.random_array[1]
         self.ax.bar(x, y)
         self.ax.axis("off")
         self.draw()
@@ -56,7 +65,7 @@ class SortVisualizer(QtWidgets.QDialog):
         self.main_layout = QtWidgets.QVBoxLayout()
 
         range_value = 10
-        self.array_graph = ArrayGraph(10)
+        self.array_graph = Graph(range_value)
         self.solve_button = QtWidgets.QPushButton("SOLVE", self)
 
         # Arrange Layout
@@ -65,6 +74,7 @@ class SortVisualizer(QtWidgets.QDialog):
         self.main_layout.addWidget(self.solve_button)
 
         # Connects
+        self.solve_button.clicked.connect(self.array_graph.algorithm.solve)
 
     def center_window(self):
         """Centers window on screen."""
