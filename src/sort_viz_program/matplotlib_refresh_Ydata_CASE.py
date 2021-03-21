@@ -31,6 +31,7 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         super(Graph, self).__init__(self.fig)
         self.range_value = range_value
         self.random_array = self.create_array_random(self.range_value)
+        self.x_data, self.y_data = None, None
         self.init_graph()
         self.algorithm = FakeAlgo(self.random_array[1])
 
@@ -40,9 +41,9 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         return x, y
 
     def init_graph(self):
-        x = self.random_array[0]
-        y = self.random_array[1]
-        self.ax.bar(x, y)
+        self.x_data = self.random_array[0]
+        self.y_data = self.random_array[1]
+        self.ax.bar(self.x_data, self.y_data)
         self.ax.axis("off")
         self.draw()
 
@@ -96,4 +97,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
