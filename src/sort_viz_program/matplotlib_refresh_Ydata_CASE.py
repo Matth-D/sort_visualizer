@@ -11,18 +11,20 @@ import numpy as np
 
 
 class Signals(QtCore.QObject):
-    signal_print = QtCore.Signal(int)
+    signal_ydata = QtCore.Signal(list)
 
 
 class FakeAlgo:
     def __init__(self, start_array):
         self.start_array = start_array
         self.data_array = self.start_array.copy()
+        self.signals = Signals()
 
     def solve(self):
-        for i in range(10):
+        for i in range(30):
             self.data_array[0] *= 0.95
-            print(self.data_array)
+            self.data_array[2] *= 0.95
+            self.signals.signal_ydata.emit(self.data_array)
 
 
 class Graph(beqt5agg.FigureCanvasQTAgg):
@@ -34,6 +36,9 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         self.x_data, self.y_data = None, None
         self.init_graph()
         self.algorithm = FakeAlgo(self.random_array[1])
+        self._plot_ref = None
+        self.signals = self.algorithm.signals
+        self.signals.signal_ydata.connect(self.update_plot)
 
     def create_array_random(self, density):
         x = np.arange(density)
@@ -46,6 +51,19 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         self.ax.bar(self.x_data, self.y_data)
         self.ax.axis("off")
         self.draw()
+
+    def update_plot(self, value):
+        print("update_plot")
+        self.y_data = value
+
+        if self._plot_ref is None:
+            plot_refs = self.ax(self.x_data, self.y_data, "r")
+            self._plot_ref = plot_refs[0]
+        else:
+            self._plot_ref.set_ydata(self.y_data)
+
+        self.draw()
+        self.flush_events()
 
 
 class SortVisualizer(QtWidgets.QDialog):
