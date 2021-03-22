@@ -34,6 +34,7 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         self.range_value = range_value
         self.random_array = self.create_array_random(self.range_value)
         self.x_data, self.y_data = None, None
+        self.bars = None
         self.init_graph()
         self.algorithm = FakeAlgo(self.random_array[1])
         self._plot_ref = None
@@ -48,20 +49,15 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
     def init_graph(self):
         self.x_data = self.random_array[0]
         self.y_data = self.random_array[1]
-        self.ax.bar(self.x_data, self.y_data)
+        self.bars = self.ax.bar(self.x_data, self.y_data)
         self.ax.axis("off")
         self.draw()
 
-    def update_plot(self, value):
-        # print("update_plot")
-        self.y_data = value
-
-        if self._plot_ref is None:
-            plot_refs = self.ax.plot(self.x_data, self.y_data, "r")
-            # plot_refs = plt.subplots(figsize=(2, 2), constrained_layout=True)
-            self._plot_ref = plot_refs[0]
-        else:
-            self._plot_ref.set_ydata(self.y_data)
+    def update_plot(self, y_data):
+        if not self.bars:
+            return
+        for i, elem in enumerate(self.bars):
+            elem.set_height(y_data[i])
 
         self.flush_events()
         self.draw()
