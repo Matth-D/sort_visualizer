@@ -1,13 +1,13 @@
 import os
 import sys
 
+from PySide2 import QtCore, QtGui, QtWidgets
 import numpy as np
 
-# core_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-# if core_path not in sys.path:
-#     sys.path.append(core_path)
 
-# import sort_viz_program.core as core
+class Signals(QtCore.QObject):
+    signal_sort_array = QtCore.Signal(int)
+    signal_test = QtCore.Signal(int)
 
 
 class MergeSort:
@@ -17,6 +17,8 @@ class MergeSort:
         self.input_array = input_array
         self.sort_array = self.input_array.copy()
         self.inf = float("inf")
+        self.signals = Signals()
+        self.test_var = 12451
 
     def solve(self):
         self.input_array = self.divide(self.input_array)
@@ -39,6 +41,8 @@ class MergeSort:
 
         self.sort_array[left_index : right_index + 1] = slice_array
         self.sort_array[:, 0] = np.arange(len(self.sort_array))
+        self.signals.signal_sort_array.emit(self.test_var)
+        self.signals.signal_test.emit(self.test_var)
 
     def merge(self, left, right):
         merged_array = np.empty((0, 2))
@@ -75,21 +79,3 @@ class MergeSort:
 
         merged_array[:, 0] = np.arange(left_index, right_index + 1)
         return merged_array
-
-
-# values = np.array([3, 2, 1, 8, 5, 9])
-# index = np.array(range(len(values)))
-
-# arr1 = np.column_stack((index, values))
-# arr1 = core.create_array_random(10)
-# x = arr1[:, 0]
-# y = arr1[:, 1]
-# print(arr1)
-# print(x)
-# print(y)
-# print(arr1)
-# arr2 = arr1.copy()
-# algo = MergeSort(arr1)
-# algo.solve()
-# print(algo.sort_array)
-# print("base array:", arr2)

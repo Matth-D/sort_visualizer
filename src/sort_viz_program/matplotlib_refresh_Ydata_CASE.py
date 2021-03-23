@@ -39,6 +39,7 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         self._plot_ref = None
         self.signals = self.algorithm.signals
         self.signals.signal_ydata.connect(self.update_plot)
+        self.signals.signal_ydata.connect(self.print_signal)
 
     def create_array_random(self, density):
         x = np.arange(density)
@@ -51,6 +52,9 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         self.ax.bar(self.x_data, self.y_data)
         self.ax.axis("off")
         self.draw()
+
+    def print_signal(self, value):
+        print(value)
 
     def update_plot(self, value):
         # print("update_plot")

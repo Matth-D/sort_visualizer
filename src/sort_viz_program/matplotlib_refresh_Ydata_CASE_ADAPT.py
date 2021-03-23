@@ -20,11 +20,15 @@ class FakeAlgo:
         self.data_array = self.start_array.copy()
         self.signals = Signals()
 
+    def send_signal(self):
+        self.signals.signal_ydata.emit(self.data_array)
+
     def solve(self):
         for i in range(30):
             self.data_array[0] *= 0.95
             self.data_array[2] *= 0.95
-            self.signals.signal_ydata.emit(self.data_array)
+            self.send_signal()
+            # self.signals.signal_ydata.emit(self.data_array)
 
 
 class Graph(beqt5agg.FigureCanvasQTAgg):
@@ -39,7 +43,7 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         self.algorithm = FakeAlgo(self.random_array[1])
         self._plot_ref = None
         self.signals = self.algorithm.signals
-        self.signals.signal_ydata.connect(self.update_plot)
+        self.signals.signal_ydata.connect(self.update_bars)
 
     def create_array_random(self, density):
         x = np.arange(density)
@@ -53,7 +57,7 @@ class Graph(beqt5agg.FigureCanvasQTAgg):
         self.ax.axis("off")
         self.draw()
 
-    def update_plot(self, y_data):
+    def update_bars(self, y_data):
         if not self.bars:
             return
         for i, elem in enumerate(self.bars):

@@ -19,24 +19,36 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         self.algorithm_value = algorithm_value
         self.input_array = core.create_array_random(10)
         self.algorithm = None
+        self.bars = None
         self.set_graph_density()
         self.set_algorithm(self.algorithm_value)
+        self.signals = self.algorithm.signals
+        # self.signals.signal_sort_array.connect(self.update_bars)
+        self.signals.signal_sort_array.connect(self.print_signal)
+        self.signals.signal_test.connect(self.print_signal)
 
     def set_graph_density(self, density=10):
         self.input_array = core.create_array_random(density)
-        # self.y = np.round(np.random.rand(density), decimals=3)
-        # self.x = np.arange(len(self.y))
-        # self.x = self.sort_array
         x = self.input_array[:, 0]
         y = self.input_array[:, 1]
         self.ax.clear()
-        self.ax.bar(x, y)
+        self.bars = self.ax.bar(x, y)
         self.ax.axis("off")
         self.draw()
         self.update()
 
-    def update_graph_data(self):
-        pass
+    def print_signal(self, value):
+        print(value)
+
+    def update_bars(self, sort_array):
+        y_data = sort_array[:, 1]
+        if not self.bars:
+            return
+        for i, elem in enumerate(self.bars):
+            elem.set_height(y_data[i])
+
+        self.flush_events()
+        self.draw()
 
     def set_algorithm(self, value):
         self.algorithm_value = value
@@ -44,12 +56,9 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         if self.algorithm_value == "Top Down Merge Sort":
             self.algorithm = top_down_merge_sort.MergeSort(algorithm_arg)
 
-    # TODO: next step update graph with algo sortarray and make sure that algorithm value and density get udpated correctly
     def solve_algorithm(self):
         self.set_algorithm(self.algorithm_value)
         self.algorithm.solve()
-        print(self.algorithm.sort_array)
-        pass
 
 
 class SortVisualizer(QtWidgets.QDialog):
@@ -137,13 +146,14 @@ class SortVisualizer(QtWidgets.QDialog):
         self.reset_button.setMinimumHeight(self.app_size[0] * 0.07)
         self.reset_button.setMaximumWidth(self.app_size[0] * 0.07)
         self.algorithm_list.setMaximumWidth(self.app_size[0] * 0.25)
+        self.density_slider.setMinimum(1)
+        self.density_slider.setMaximum(300)
+        self.density_slider.setValue(10)
 
         # Connects
         self.density_slider.valueChanged.connect(self.array_graph.set_graph_density)
         self.algorithm_list.currentTextChanged.connect(self.array_graph.set_algorithm)
-        self.density_slider.setMinimum(1)
-        self.density_slider.setMaximum(300)
-        self.density_slider.setValue(10)
+        self.sort_button.clicked.connect(self.array_graph.solve_algorithm)
 
     def center_window(self):
         """Centers window on screen."""

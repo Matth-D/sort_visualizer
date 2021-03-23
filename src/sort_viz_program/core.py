@@ -17,7 +17,3 @@ def create_array_random(array_length):
     merge = np.column_stack((index, values))
     return merge
 
-
-list1 = np.array([0, 1, 2, 3, 4], dtype=float)
-list1 = list1 * 0.1
-print(list1)
