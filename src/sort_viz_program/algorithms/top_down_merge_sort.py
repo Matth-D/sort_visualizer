@@ -6,22 +6,25 @@ import numpy as np
 
 
 class Signals(QtCore.QObject):
-    signal_sort_array = QtCore.Signal(int)
-    signal_test = QtCore.Signal(int)
+    signal_sort_array = QtCore.Signal(np.ndarray)
+    # signal_test = QtCore.Signal(int)
 
 
-class MergeSort:
+class MergeSort(QtCore.QObject):
     def __init__(self, input_array):
+        self.signals = Signals()
         self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(n)"
         self.input_array = input_array
         self.sort_array = self.input_array.copy()
         self.inf = float("inf")
-        self.signals = Signals()
         self.test_var = 12451
+        self.solving = 0
 
     def solve(self):
+        self.solving = 1
         self.input_array = self.divide(self.input_array)
+        self.solving = 0
         return
 
     def divide(self, input_array):
@@ -41,8 +44,8 @@ class MergeSort:
 
         self.sort_array[left_index : right_index + 1] = slice_array
         self.sort_array[:, 0] = np.arange(len(self.sort_array))
-        self.signals.signal_sort_array.emit(self.test_var)
-        self.signals.signal_test.emit(self.test_var)
+        self.signals.signal_sort_array.emit(self.sort_array)
+        # self.signals.signal_test.emit(self.test_var)
 
     def merge(self, left, right):
         merged_array = np.empty((0, 2))

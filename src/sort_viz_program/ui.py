@@ -14,20 +14,25 @@ import numpy as np
 
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
     def __init__(self, algorithm_value):
-        self.fig, self.ax = plt.subplots(figsize=(2, 2), constrained_layout=True)
+        # self.fig, self.ax = plt.subplots(figsize=(0.1, 0.1), constrained_layout=True)
+        self.fig, self.ax = plt.subplots(
+            figsize=(1, 1), dpi=0.001, constrained_layout=True
+        )
+        plt.ioff()
         super(ArrayGraph, self).__init__(self.fig)
         self.algorithm_value = algorithm_value
         self.input_array = core.create_array_random(10)
         self.algorithm = None
         self.bars = None
+        self.signals = None
         self.set_graph_density()
         self.set_algorithm(self.algorithm_value)
-        self.signals = self.algorithm.signals
-        # self.signals.signal_sort_array.connect(self.update_bars)
-        self.signals.signal_sort_array.connect(self.print_signal)
-        self.signals.signal_test.connect(self.print_signal)
+        # self.signals = self.algorithm.signals
+        self.signals.signal_sort_array.connect(self.update_bars)
+        # self.signals.signal_sort_array.connect(self.print_signal)
 
-    def set_graph_density(self, density=10):
+    def set_graph_density(self, density=60):
+        print(density)
         self.input_array = core.create_array_random(density)
         x = self.input_array[:, 0]
         y = self.input_array[:, 1]
@@ -40,10 +45,11 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
     def print_signal(self, value):
         print(value)
 
+    @QtCore.Slot(np.ndarray)
     def update_bars(self, sort_array):
-        y_data = sort_array[:, 1]
         if not self.bars:
             return
+        y_data = sort_array[:, 1]
         for i, elem in enumerate(self.bars):
             elem.set_height(y_data[i])
 
@@ -55,9 +61,10 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         algorithm_arg = self.input_array
         if self.algorithm_value == "Top Down Merge Sort":
             self.algorithm = top_down_merge_sort.MergeSort(algorithm_arg)
+        self.signals = self.algorithm.signals
 
     def solve_algorithm(self):
-        self.set_algorithm(self.algorithm_value)
+        # self.set_algorithm(self.algorithm_value)
         self.algorithm.solve()
 
 
@@ -73,7 +80,8 @@ class SortVisualizer(QtWidgets.QDialog):
         self.algorithm_value = self.algorithms_list[0]
         self.algorithm = None
         self.init_ui()
-        self.setGeometry(300, 300, self.app_size[0], self.app_size[1])
+        self.setGeometry(300, 300, 600, 400)
+        # self.setGeometry(300, 300, self.app_size[0], self.app_size[1])
         self.setWindowTitle("Sort Visualizer")
         self.center_window()
 
@@ -151,6 +159,7 @@ class SortVisualizer(QtWidgets.QDialog):
         self.density_slider.setValue(10)
 
         # Connects
+        # self.density_slider.sliderReleased.connect(self.array_graph.set_graph_density)
         self.density_slider.valueChanged.connect(self.array_graph.set_graph_density)
         self.algorithm_list.currentTextChanged.connect(self.array_graph.set_algorithm)
         self.sort_button.clicked.connect(self.array_graph.solve_algorithm)
@@ -174,8 +183,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # app = QtWidgets.QApplication(sys.argv)
-    # graph = ArrayGraph()
-    # graph.show()
-    # sys.exit(app.exec_())
     main()
+
