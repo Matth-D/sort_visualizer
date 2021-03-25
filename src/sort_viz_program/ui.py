@@ -16,7 +16,7 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
     def __init__(self, algorithm_value):
         # self.fig, self.ax = plt.subplots(figsize=(0.1, 0.1), constrained_layout=True)
         self.fig, self.ax = plt.subplots(
-            figsize=(1, 1), dpi=0.001, constrained_layout=True
+            figsize=(0.1, 0.1), dpi=1, constrained_layout=True
         )
         plt.ioff()
         super(ArrayGraph, self).__init__(self.fig)
@@ -32,7 +32,6 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         # self.signals.signal_sort_array.connect(self.print_signal)
 
     def set_graph_density(self, density=60):
-        print(density)
         self.input_array = core.create_array_random(density)
         x = self.input_array[:, 0]
         y = self.input_array[:, 1]
@@ -41,9 +40,6 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         self.ax.axis("off")
         self.draw()
         self.update()
-
-    def print_signal(self, value):
-        print(value)
 
     @QtCore.Slot(np.ndarray)
     def update_bars(self, sort_array):
@@ -80,17 +76,16 @@ class SortVisualizer(QtWidgets.QDialog):
         self.algorithm_value = self.algorithms_list[0]
         self.algorithm = None
         self.init_ui()
-        self.setGeometry(300, 300, 600, 400)
+        self.setGeometry(300, 300, self.app_size[0], self.app_size[1])
         # self.setGeometry(300, 300, self.app_size[0], self.app_size[1])
         self.setWindowTitle("Sort Visualizer")
         self.center_window()
 
     def init_ui(self):
         self.screen_size = QtGui.QGuiApplication.primaryScreen().availableGeometry()
-        self.app_size = (
-            round(self.screen_size.width() * 0.6),
-            round(self.screen_size.height() * 0.6),
-        )
+        w_width = 600
+        w_height = 500
+        self.app_size = (w_width, w_height)
         # Create Widgets
         self.main_layout = QtWidgets.QVBoxLayout()
 
@@ -145,14 +140,15 @@ class SortVisualizer(QtWidgets.QDialog):
         self.layout_v3.addWidget(self.time_complexity_label)
         self.layout_v3.addWidget(self.space_complexity_label)
 
-        self.main_layout.setStretch(0, 3)
+        self.main_layout.setStretch(0, 4)
         self.main_layout.setStretch(2, 1)
 
         # Appearence
-        self.sort_button.setMinimumHeight(self.app_size[0] * 0.07)
-        self.sort_button.setMaximumWidth(self.app_size[0] * 0.07)
-        self.reset_button.setMinimumHeight(self.app_size[0] * 0.07)
-        self.reset_button.setMaximumWidth(self.app_size[0] * 0.07)
+        square_button_size = 40
+        self.sort_button.setMinimumHeight(square_button_size)
+        self.sort_button.setMaximumWidth(square_button_size)
+        self.reset_button.setMinimumHeight(square_button_size)
+        self.reset_button.setMaximumWidth(square_button_size)
         self.algorithm_list.setMaximumWidth(self.app_size[0] * 0.25)
         self.density_slider.setMinimum(1)
         self.density_slider.setMaximum(300)
