@@ -13,11 +13,9 @@ import numpy as np
 
 
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
-    def __init__(self, algorithm_value):
+    def __init__(self, algorithm_value, default_density):
         # self.fig, self.ax = plt.subplots(figsize=(0.1, 0.1), constrained_layout=True)
-        self.fig, self.ax = plt.subplots(
-            figsize=(0.1, 0.1), dpi=1, constrained_layout=True
-        )
+        self.fig, self.ax = plt.subplots(figsize=(1, 1), dpi=1, constrained_layout=True)
         plt.ioff()
         super(ArrayGraph, self).__init__(self.fig)
         self.algorithm_value = algorithm_value
@@ -25,13 +23,11 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         self.algorithm = None
         self.bars = None
         self.signals = None
-        self.set_graph_density()
+        self.density = default_density
+        self.set_graph_density(self.density)
         self.set_algorithm(self.algorithm_value)
-        # self.signals = self.algorithm.signals
-        self.signals.signal_sort_array.connect(self.update_bars)
-        # self.signals.signal_sort_array.connect(self.print_signal)
 
-    def set_graph_density(self, density=60):
+    def set_graph_density(self, density):
         self.input_array = core.create_array_random(density)
         x = self.input_array[:, 0]
         y = self.input_array[:, 1]
@@ -58,9 +54,10 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         if self.algorithm_value == "Top Down Merge Sort":
             self.algorithm = top_down_merge_sort.MergeSort(algorithm_arg)
         self.signals = self.algorithm.signals
+        self.signals.signal_sort_array.connect(self.update_bars)
 
     def solve_algorithm(self):
-        # self.set_algorithm(self.algorithm_value)
+        self.set_algorithm(self.algorithm_value)
         self.algorithm.solve()
 
 
@@ -89,7 +86,8 @@ class SortVisualizer(QtWidgets.QDialog):
         # Create Widgets
         self.main_layout = QtWidgets.QVBoxLayout()
 
-        self.array_graph = ArrayGraph(self.algorithm_value)
+        default_density = 40
+        self.array_graph = ArrayGraph(self.algorithm_value, default_density)
         self.density_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal, self)
 
         self.layout_h1 = QtWidgets.QHBoxLayout()
@@ -144,15 +142,15 @@ class SortVisualizer(QtWidgets.QDialog):
         self.main_layout.setStretch(2, 1)
 
         # Appearence
-        square_button_size = 40
+        square_button_size = 70
         self.sort_button.setMinimumHeight(square_button_size)
         self.sort_button.setMaximumWidth(square_button_size)
         self.reset_button.setMinimumHeight(square_button_size)
         self.reset_button.setMaximumWidth(square_button_size)
-        self.algorithm_list.setMaximumWidth(self.app_size[0] * 0.25)
+        self.algorithm_list.setMaximumWidth(300)
         self.density_slider.setMinimum(1)
         self.density_slider.setMaximum(300)
-        self.density_slider.setValue(10)
+        self.density_slider.setValue(default_density)
 
         # Connects
         # self.density_slider.sliderReleased.connect(self.array_graph.set_graph_density)
@@ -180,4 +178,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
