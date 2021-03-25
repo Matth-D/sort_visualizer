@@ -18,7 +18,6 @@ class MergeSort(QtCore.QObject):
         self.input_array = input_array
         self.sort_array = self.input_array.copy()
         self.inf = float("inf")
-        self.test_var = 12451
         self.solving = 0
 
     def solve(self):
