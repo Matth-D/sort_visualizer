@@ -1,30 +1,35 @@
-import os
-import sys
-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore
 import numpy as np
 
+# import signals
+from . import signals
 
-class Signals(QtCore.QObject):
-    signal_sort_array = QtCore.Signal(np.ndarray)
-    # signal_test = QtCore.Signal(int)
+# class Signals(QtCore.QObject):
+#     signal_sort_array = QtCore.Signal(np.ndarray)
+#     signal_iterations = QtCore.Signal(int)
 
 
 class MergeSort(QtCore.QObject):
     def __init__(self, input_array):
-        self.signals = Signals()
+        # self.signals = Signals()
+        self.signals = signals.Signals()
         self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(n)"
         self.input_array = input_array
         self.sort_array = self.input_array.copy()
         self.inf = float("inf")
         self.solving = 0
+        self.iterations = 0
 
     def solve(self):
+        if self.solving == 1:
+            return
+
         self.solving = 1
+
         self.input_array = self.divide(self.input_array)
+
         self.solving = 0
-        return
 
     def divide(self, input_array):
         if len(input_array) <= 1:
@@ -44,7 +49,8 @@ class MergeSort(QtCore.QObject):
         self.sort_array[left_index : right_index + 1] = slice_array
         self.sort_array[:, 0] = np.arange(len(self.sort_array))
         self.signals.signal_sort_array.emit(self.sort_array)
-        # self.signals.signal_test.emit(self.test_var)
+        self.iterations += 1
+        self.signals.signal_iterations.emit(self.iterations)
 
     def merge(self, left, right):
         merged_array = np.empty((0, 2))
