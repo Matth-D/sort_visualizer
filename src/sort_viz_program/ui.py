@@ -28,7 +28,7 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         self.set_graph_density(self.density)
         self.set_algorithm(self.algorithm_value)
 
-    def update_signal_source():
+    def update_signal_source(self):
         self.signals = self.algorithm.signals
 
     def set_graph_density(self, density):
@@ -170,6 +170,7 @@ class SortVisualizer(QtWidgets.QDialog):
         self.algorithm_list.currentTextChanged.connect(self.array_graph.set_algorithm)
         self.algorithm_list.currentTextChanged.connect(self.update_infos_on_change)
         self.sort_button.clicked.connect(self.array_graph.solve_algorithm)
+        self.reset_button.clicked.connect(self.reset_graph)
 
         self.density_slider.valueChanged.connect(self.slider_changed)
         self.density_slider.sliderPressed.connect(self.slider_disconnect)
@@ -215,6 +216,10 @@ class SortVisualizer(QtWidgets.QDialog):
         self.signals.signal_iterations.connect(self.set_iterations_label)
         print("ui signals =", str(hex(id(self.signals))))
         print("graph signals =", str(hex(id(self.array_graph.signals))))
+
+    def reset_graph(self):
+        self.array_graph.set_graph_density(self.density_slider.value())
+        self.array_graph.set_algorithm(self.algorithm_list.currentText())
 
     def center_window(self):
         """Centers window on screen."""

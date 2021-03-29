@@ -29,7 +29,7 @@ class MergeSort(QtCore.QObject):
 
         self.input_array = self.divide(self.input_array)
 
-        self.solving = 0
+        # self.solving = 0
 
     def divide(self, input_array):
         if len(input_array) <= 1:

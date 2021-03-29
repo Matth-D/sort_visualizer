@@ -1,26 +1,11 @@
-import matplotlib.animation as animation
-import matplotlib.pyplot as plt
 import numpy as np
 
-
-def generate_data():
-    a = np.arange(25).reshape(5, 5)
-    b = 10 * np.random.rand(5, 5)
-    return a - b
+arr1 = np.array([3, 2, 5, 6, 2, 1, 8])
 
 
-def update(data):
-    mat.set_data(data)
-    return mat
+def bubble_sort(input_array):
+    for i in range(len(input_array)):
+        print(input_array[i])
 
 
-def data_gen():
-    while True:
-        yield generate_data()
-
-
-fig, ax = plt.subplots()
-mat = ax.matshow(generate_data())
-plt.colorbar(mat)
-ani = animation.FuncAnimation(fig, update, data_gen, interval=10, save_count=50)
-plt.show()
+bubble_sort(arr1)
