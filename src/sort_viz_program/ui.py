@@ -220,6 +220,9 @@ class SortVisualizer(QtWidgets.QDialog):
     def reset_graph(self):
         self.array_graph.set_graph_density(self.density_slider.value())
         self.array_graph.set_algorithm(self.algorithm_list.currentText())
+        self.update_signal_source()
+        self.set_iterations_label()
+        # TODO: Fix iteration doesn't update after reset.
 
     def center_window(self):
         """Centers window on screen."""
