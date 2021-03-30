@@ -1,23 +1,16 @@
 from PySide2 import QtCore
 import numpy as np
 
-# import signals
-from . import signals
-
-# class Signals(QtCore.QObject):
-#     signal_sort_array = QtCore.Signal(np.ndarray)
-#     signal_iterations = QtCore.Signal(int)
+from . import algo_utils
 
 
 class MergeSort(QtCore.QObject):
     def __init__(self, input_array):
-        # self.signals = Signals()
-        self.signals = signals.Signals()
+        self.signals = algo_utils.Signals()
         self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(n)"
         self.input_array = input_array
         self.sort_array = self.input_array.copy()
-        self.inf = float("inf")
         self.solving = 0
         self.iterations = 0
 

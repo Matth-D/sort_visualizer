@@ -30,6 +30,7 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
 
     def update_signal_source(self):
         self.signals = self.algorithm.signals
+        self.signals.signal_sort_array.connect(self.update_bars)
 
     def set_graph_density(self, density):
         self.input_array = core.create_array_random(density)
@@ -61,7 +62,6 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
             self.algorithm = bubble_sort.BubbleSort(algorithm_arg)
 
         self.update_signal_source()
-        self.signals.signal_sort_array.connect(self.update_bars)
 
     def solve_algorithm(self):
         self.algorithm.solve()
@@ -83,9 +83,6 @@ class SortVisualizer(QtWidgets.QDialog):
         self.setWindowTitle("Sort Visualizer")
         self.center_window()
         self.update_signal_source()
-        self.signals.signal_iterations.connect(self.set_iterations_label)
-        print("ui signals =", str(hex(id(self.signals))))
-        print("graph signals =", str(hex(id(self.array_graph.signals))))
 
     def init_ui(self):
         # self.screen_size = QtGui.QGuiApplication.primaryScreen().availableGeometry()
@@ -167,7 +164,7 @@ class SortVisualizer(QtWidgets.QDialog):
         self.density_slider.setValue(default_density)
 
         # Signals
-        self.algorithm_list.currentTextChanged.connect(self.array_graph.set_algorithm)
+        # self.algorithm_list.currentTextChanged.connect(self.array_graph.set_algorithm)
         self.algorithm_list.currentTextChanged.connect(self.update_infos_on_change)
         self.sort_button.clicked.connect(self.array_graph.solve_algorithm)
         self.reset_button.clicked.connect(self.reset_graph)
@@ -176,13 +173,17 @@ class SortVisualizer(QtWidgets.QDialog):
         self.density_slider.sliderPressed.connect(self.slider_disconnect)
         self.density_slider.sliderReleased.connect(self.slider_reconnect)
 
-    def update_infos_on_change(self):
+    def update_infos_on_change(self, value):
+        # self.array_graph.set_algorithm(value)
+        # self.set_iterations_label()
+        self.reset_graph()
         self.set_time_complexity_label(self.array_graph.algorithm.time_complexity)
         self.set_space_complexity_label(self.array_graph.algorithm.space_complexity)
-        self.update_signal_source()
+        # self.update_signal_source()
 
     def update_signal_source(self):
         self.signals = self.array_graph.signals
+        self.signals.signal_iterations.connect(self.set_iterations_label)
 
     @QtCore.Slot(int)
     def set_iterations_label(self, iteration=0):
@@ -212,17 +213,21 @@ class SortVisualizer(QtWidgets.QDialog):
         self.array_graph.set_graph_density(value)
         self.array_graph.set_algorithm(self.algorithm_list.currentText())
         self.set_array_length_label(value)
+        self.set_iterations_label()
         self.update_signal_source()
         self.signals.signal_iterations.connect(self.set_iterations_label)
-        print("ui signals =", str(hex(id(self.signals))))
-        print("graph signals =", str(hex(id(self.array_graph.signals))))
 
     def reset_graph(self):
         self.array_graph.set_graph_density(self.density_slider.value())
         self.array_graph.set_algorithm(self.algorithm_list.currentText())
         self.update_signal_source()
         self.set_iterations_label()
-        # TODO: Fix iteration doesn't update after reset.
+        # self.print_signal_source()
+
+    def print_signal_source(self):
+        print("ui signals =", str(hex(id(self.signals))))
+        print("graph signals =", str(hex(id(self.array_graph.signals))))
+        print("algo signals: ", str(hex(id(self.array_graph.algorithm.signals))))
 
     def center_window(self):
         """Centers window on screen."""
