@@ -1,16 +1,13 @@
 import sys
 
 from PySide2 import QtCore, QtGui, QtWidgets
-import algorithms.bubble_sort as bubble_sort
-import algorithms.top_down_merge_sort as top_down_merge_sort
-import core
 import matplotlib.backends.backend_qt5agg as beqt5agg
 import matplotlib.figure as mpltfig
 import matplotlib.pyplot as plt
 import numpy as np
 
-# from . import core
-# from .algorithms import top_down_merge_sort
+from . import core
+from .algorithms import bubble_sort, heap_sort, top_down_merge_sort
 
 
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
@@ -60,6 +57,8 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
             self.algorithm = top_down_merge_sort.MergeSort(algorithm_arg)
         if self.algorithm_value == "Bubble Sort":
             self.algorithm = bubble_sort.BubbleSort(algorithm_arg)
+        if self.algorithm_value == "Heap Sort":
+            self.algorithm = heap_sort.HeapSort(algorithm_arg)
 
         self.update_signal_source()
 
