@@ -73,7 +73,7 @@ class SortVisualizer(QtWidgets.QDialog):
             "Top Down Merge Sort",
             "Bubble Sort",
             "Heap Sort",
-            "Insert Sort",
+            "Insertion Sort",
         ]
         self.algorithm_value = self.algorithms_list[0]
         self.algorithm = None

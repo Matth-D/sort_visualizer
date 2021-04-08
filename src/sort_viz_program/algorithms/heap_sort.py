@@ -27,7 +27,7 @@ class HeapSort(QtCore.QObject):
 
         # Create Max Heap
         for i in range(start_index, -1, -1):
-            self.max_heap(self.sort_array, arr_len, i)
+            self.build_max_heap(self.sort_array, arr_len, i)
 
         # Swap first and last elements
         for i in range(arr_len - 1, 0, -1):
@@ -36,9 +36,9 @@ class HeapSort(QtCore.QObject):
                 self.sort_array[i][1],
             )
             self.update_sort_array()
-            self.max_heap(self.sort_array, i, 0)
+            self.build_max_heap(self.sort_array, i, 0)
 
-    def max_heap(self, in_arr, array_length, index):
+    def build_max_heap(self, in_arr, array_length, index):
         maxi = index
         left = 2 * index + 1
         right = 2 * index + 2
@@ -58,7 +58,7 @@ class HeapSort(QtCore.QObject):
                 in_arr[index][1],
             )
             self.update_sort_array()
-            self.max_heap(in_arr, array_length, maxi)
+            self.build_max_heap(in_arr, array_length, maxi)
 
     def update_sort_array(self):
         self.iterations += 1
