@@ -19,10 +19,7 @@ def create_array_random(array_length):
         print("Length parameter must be integer")
         return None
     index = np.array(range(array_length))
-    # values = np.round(np.random.rand(array_length), decimals=3)
-    # values = np.round(np.random.uniform(low=0, high=1, size=array_length), decimals=3)
     values = np.round(np.random.random_sample(array_length), decimals=3)
-    # values = np.random.randint(25, size=array_length)
     merge = np.column_stack((index, values))
     return merge
 

@@ -60,6 +60,7 @@ class MergeSort:
     def update_sort_array(self, left_index, right_index, slice_array, x_data):
         """Update sort array with current left and right reordered slices.
         Left and right index are used to insert ordered slice in original array.
+        Send signals to Graph.
 
         Args:
             left_index (int): Index of first element of left slice.

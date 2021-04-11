@@ -8,6 +8,9 @@ import numpy as np
 from . import core
 from .algorithms import bubble_sort, heap_sort, insertion_sort, top_down_merge_sort
 
+# TODO: MAYBE CREATE A GUI SWITCH ON ALGORITHM IF WE WANT THEM TO WORK WITH GUI OR ON THEIR OWN.
+# THINKING OF IMPORTING EXISTING INSERTION SORT AND MERGE SORT INTO EXECUTION OF TIMSORT.?
+
 
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
     """Class containing random array sorting display.
@@ -130,10 +133,7 @@ class SortVisualizer(QtWidgets.QDialog):
             "Insertion Sort",
             "Tim Sort",
         ]
-        # self.algorithms_list = core.ALGORITHMS
-
         self.algorithm_value = self.algorithms_list[0]
-        print(self.algorithm_value)
         self.algorithm = None
         self.init_ui()
         self.setGeometry(300, 300, self.app_size[0], self.app_size[1])
