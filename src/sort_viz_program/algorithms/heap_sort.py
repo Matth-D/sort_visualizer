@@ -1,12 +1,7 @@
-from PySide2 import QtCore
-
-# import algo_utils
-import numpy as np
-
 from . import algo_utils
 
 
-class HeapSort(QtCore.QObject):
+class HeapSort:
     def __init__(self, input_array):
         self.signals = algo_utils.Signals()
         self.time_complexity = "O(nlogn)"
@@ -14,10 +9,14 @@ class HeapSort(QtCore.QObject):
         self.input_array = input_array
         self.sort_array = self.input_array.copy()
         self.solving = 0
+        self.solved = 0
         self.iterations = 0
 
     def solve(self):
         if self.solving == 1:
+            return
+
+        if self.solved == 1:
             return
 
         self.solving = 1
@@ -35,8 +34,11 @@ class HeapSort(QtCore.QObject):
                 self.sort_array[0][1],
                 self.sort_array[i][1],
             )
-            self.update_sort_array()
+            self.update_sort_array(i)
             self.build_max_heap(self.sort_array, i, 0)
+
+        self.solving = 0
+        self.solved = 1
 
     def build_max_heap(self, in_arr, array_length, index):
         maxi = index
@@ -57,14 +59,14 @@ class HeapSort(QtCore.QObject):
                 in_arr[maxi][1],
                 in_arr[index][1],
             )
-            self.update_sort_array()
+            self.update_sort_array(index)
             self.build_max_heap(in_arr, array_length, maxi)
 
-    def update_sort_array(self):
+    def update_sort_array(self, x_data):
         self.iterations += 1
-        self.sort_array[:, 0] = np.arange(len(self.input_array))
         self.signals.signal_iterations.emit(self.iterations)
         self.signals.signal_sort_array.emit(self.sort_array)
+        self.signals.signal_current.emit(x_data)
 
 
 # array_length = 10

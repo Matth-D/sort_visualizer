@@ -1,12 +1,17 @@
-import re
-
 from PySide2 import QtCore
 import numpy as np
 
 
 class Signals(QtCore.QObject):
+    """Signals used in algorithms to update Graph during solve.
+
+    Args:
+        QtCore (obj): QObject inheritance.
+    """
+
     signal_sort_array = QtCore.Signal(np.ndarray)
     signal_iterations = QtCore.Signal(int)
+    signal_current = QtCore.Signal(int)
 
 
 # def is_subarray(slice, superset):
