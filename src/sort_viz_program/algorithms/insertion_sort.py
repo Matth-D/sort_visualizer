@@ -2,7 +2,8 @@ from . import algo_utils
 
 
 class InsertionSort:
-    def __init__(self, input_array):
+    def __init__(self, input_array, **kwargs):
+        self.gui = kwargs.get("gui")
         self.signals = algo_utils.Signals()
         self.time_complexity = "O(n\u00b2)"
         self.space_complexity = "O(1)"

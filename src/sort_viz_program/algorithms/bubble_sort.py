@@ -4,12 +4,13 @@ from . import algo_utils
 class BubbleSort:
     """Bubble Sort algorithm."""
 
-    def __init__(self, input_array):
+    def __init__(self, input_array, **kwargs):
         """Class init.
 
         Args:
             input_array (np.ndarray): Array to sort.
         """
+        self.gui = kwargs.get("gui")
         self.signals = algo_utils.Signals()
         self.time_complexity = "O(n\u00b2)"
         self.space_complexity = "O(1)"

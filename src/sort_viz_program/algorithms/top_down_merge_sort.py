@@ -6,12 +6,14 @@ from . import algo_utils
 class MergeSort:
     """Merge sort algorithm."""
 
-    def __init__(self, input_array):
+    def __init__(self, input_array, **kwargs):
         """Class init.
 
         Args:
             input_array (np.ndarray): Array to sort.
         """
+        self.gui = kwargs.get("gui")
+        print(self.gui)
         self.signals = algo_utils.Signals()
         self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(n)"

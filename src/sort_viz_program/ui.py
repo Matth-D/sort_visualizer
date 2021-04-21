@@ -99,15 +99,20 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
             value (str): Selected algorithm name.
         """
         self.algorithm_value = value
-        algorithm_arg = self.input_array
+        algorithm_arg = [self.input_array]
+        algorithm_kwargs = {"gui": 0}
         if self.algorithm_value == "Top Down Merge Sort":
-            self.algorithm = top_down_merge_sort.MergeSort(algorithm_arg)
+            self.algorithm = top_down_merge_sort.MergeSort(
+                *algorithm_arg, **algorithm_kwargs
+            )
         if self.algorithm_value == "Bubble Sort":
-            self.algorithm = bubble_sort.BubbleSort(algorithm_arg)
+            self.algorithm = bubble_sort.BubbleSort(*algorithm_arg, **algorithm_kwargs)
         if self.algorithm_value == "Heap Sort":
-            self.algorithm = heap_sort.HeapSort(algorithm_arg)
+            self.algorithm = heap_sort.HeapSort(*algorithm_arg, **algorithm_kwargs)
         if self.algorithm_value == "Insertion Sort":
-            self.algorithm = insertion_sort.InsertionSort(algorithm_arg)
+            self.algorithm = insertion_sort.InsertionSort(
+                *algorithm_arg, **algorithm_kwargs
+            )
 
         self.update_signal_source()
 
