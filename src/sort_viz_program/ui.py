@@ -136,6 +136,7 @@ class SortVisualizer(QtWidgets.QDialog):
             "Bubble Sort",
             "Heap Sort",
             "Insertion Sort",
+            "Binary Insertion Sort",
             "Tim Sort",
         ]
         self.algorithm_value = self.algorithms_list[0]
