@@ -1,7 +1,7 @@
 from . import algo_utils
 
 
-class InsertionSort:
+class BinaryInsertionSort:
     def __init__(self, input_array):
         self.signals = algo_utils.Signals()
         self.time_complexity = "O(n\u00b2)"
