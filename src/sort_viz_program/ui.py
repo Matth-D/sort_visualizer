@@ -100,7 +100,7 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         """
         self.algorithm_value = value
         algorithm_arg = [self.input_array]
-        algorithm_kwargs = {"gui": 0}
+        algorithm_kwargs = {"gui": 1}
         if self.algorithm_value == "Top Down Merge Sort":
             self.algorithm = top_down_merge_sort.MergeSort(
                 *algorithm_arg, **algorithm_kwargs

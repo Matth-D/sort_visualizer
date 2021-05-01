@@ -13,7 +13,6 @@ class MergeSort:
             input_array (np.ndarray): Array to sort.
         """
         self.gui = kwargs.get("gui")
-        print(self.gui)
         self.signals = algo_utils.Signals()
         self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(n)"
@@ -72,6 +71,8 @@ class MergeSort:
         """
         self.sort_array[left_index : right_index + 1] = slice_array
         self.sort_array[:, 0] = np.arange(len(self.sort_array))
+        if not self.gui:
+            return
         self.signals.signal_sort_array.emit(self.sort_array)
         self.iterations += 1
         self.signals.signal_iterations.emit(self.iterations)

@@ -26,6 +26,8 @@ class InsertionSort:
         self.solved = 1
 
     def update_sort_array(self, x_data):
+        if not self.gui:
+            return
         self.iterations += 1
         self.signals.signal_iterations.emit(self.iterations)
         self.signals.signal_sort_array.emit(self.sort_array)

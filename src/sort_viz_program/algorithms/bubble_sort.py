@@ -52,6 +52,8 @@ class BubbleSort:
         Args:
             x_data (int): X coordinate of current element being switched.
         """
+        if not self.gui:
+            return
         self.iterations += 1
         self.signals.signal_iterations.emit(self.iterations)
         self.signals.signal_sort_array.emit(self.sort_array)

@@ -3,6 +3,7 @@ from . import algo_utils
 
 class BinaryInsertionSort:
     def __init__(self, input_array):
+        self.gui = kwargs.get("gui")
         self.signals = algo_utils.Signals()
         self.time_complexity = "O(n\u00b2)"
         self.space_complexity = "O(1)"
@@ -25,10 +26,16 @@ class BinaryInsertionSort:
         self.solved = 1
 
     def update_sort_array(self, x_data):
+        if not self.gui:
+            return
         self.iterations += 1
         self.signals.signal_iterations.emit(self.iterations)
         self.signals.signal_sort_array.emit(self.sort_array)
         self.signals.signal_current.emit(x_data)
+
+    def binary_search(self, array, value, left, right):
+        middle = left + (right - left) // 2
+        pass
 
     def insertion_sort(self, sort_array):
 
