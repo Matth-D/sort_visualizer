@@ -6,7 +6,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from . import core
-from .algorithms import bubble_sort, heap_sort, insertion_sort, top_down_merge_sort
+from .algorithms import (
+    binary_sort,
+    bubble_sort,
+    heap_sort,
+    insertion_sort,
+    top_down_merge_sort,
+)
 
 # TODO: MAYBE CREATE A GUI SWITCH ON ALGORITHM IF WE WANT THEM TO WORK WITH GUI OR ON THEIR OWN.
 # THINKING OF IMPORTING EXISTING INSERTION SORT AND MERGE SORT INTO EXECUTION OF TIMSORT.?
@@ -113,6 +119,8 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
             self.algorithm = insertion_sort.InsertionSort(
                 *algorithm_arg, **algorithm_kwargs
             )
+        if self.algorithm_value == "Binary Sort":
+            self.algorithm = binary_sort.BinarySort(*algorithm_arg, **algorithm_kwargs)
 
         self.update_signal_source()
 
@@ -136,7 +144,7 @@ class SortVisualizer(QtWidgets.QDialog):
             "Bubble Sort",
             "Heap Sort",
             "Insertion Sort",
-            "Binary Insertion Sort",
+            "Binary Sort",
             "Tim Sort",
         ]
         self.algorithm_value = self.algorithms_list[0]
