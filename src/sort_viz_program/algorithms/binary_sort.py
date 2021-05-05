@@ -1,12 +1,12 @@
 import numpy as np
 
-# from . import algo_utils
+from . import algo_utils
 
 
 class BinarySort:
-    def __init__(self, input_array):
-        # self.gui = kwargs.get("gui")
-        # self.signals = algo_utils.Signals()
+    def __init__(self, input_array, **kwargs):
+        self.gui = kwargs.get("gui")
+        self.signals = algo_utils.Signals()
         self.time_complexity = "O(n\u00b2)"
         self.space_complexity = "O(1)"
         self.input_array = input_array
@@ -47,8 +47,14 @@ class BinarySort:
         Returns:
             int: Index of searched value
         """
+        if left == right:
+            if array[left] > value:
+                return left
+            if array[left] < value:
+                return left + 1
+
         if right < left:
-            return -1
+            return left
 
         middle = left + (right - left) // 2
 
@@ -62,8 +68,22 @@ class BinarySort:
             return self.binary_search(array, value, left, middle - 1)
 
     def insertion_sort(self, input_array):
+        input_array = input_array[:, 1]
 
         for i in range(1, len(input_array)):
             val = input_array[i]
             index = self.binary_search(input_array, val, 0, i - 1)
-
+            merged_array = np.hstack(
+                (
+                    input_array[0:index],
+                    input_array[i],
+                    input_array[index:i],
+                    input_array[i + 1 :],
+                )
+            )
+            input_array = merged_array
+            self.sort_array = merged_array
+            self.sort_array = np.column_stack(
+                (np.array(range(len(self.sort_array))), self.sort_array)
+            )
+            self.update_sort_array(index)
