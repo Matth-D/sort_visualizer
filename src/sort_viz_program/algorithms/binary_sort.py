@@ -7,7 +7,7 @@ class BinarySort:
     def __init__(self, input_array, **kwargs):
         self.gui = kwargs.get("gui")
         self.signals = algo_utils.Signals()
-        self.time_complexity = "O(n\u00b2)"
+        self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(1)"
         self.input_array = input_array
         self.sort_array = self.input_array.copy()
