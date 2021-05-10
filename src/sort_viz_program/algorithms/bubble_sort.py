@@ -58,29 +58,3 @@ class BubbleSort:
         self.signals.signal_iterations.emit(self.iterations)
         self.signals.signal_sort_array.emit(self.sort_array)
         self.signals.signal_current.emit(x_data)
-
-
-# array_length = 7
-# index = np.array(range(array_length))
-# values = np.round(np.random.rand(array_length), decimals=3)
-# input_array = np.column_stack((index, values))
-
-# print(input_array)
-# bb = BubbleSort(input_array)
-# bb.solve()
-# print(bb.sort_array)
-
-
-# np1 = np.array([2, 1, 4])
-
-# i = 1
-
-# np1[i], np1[i + 1] = np1[i + 1], np1[i]
-
-# np2 = input_array
-# print(np2)
-
-# i = 1
-# np2[i][1], np2[i + 1][1] = np2[i + 1][1], np2[i][1]
-
-# print(np2)
