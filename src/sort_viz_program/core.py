@@ -25,13 +25,9 @@ def create_array_random(array_length):
     # return merge
 
 
-# index = np.array(range(array_length))
-# # values = np.round(np.random.uniform(low=0, high=1), decimals=3)
-# values = np.random.uniform(low=0, high=1, size=array_length)
+arr1 = create_array_random(10)
+arr2 = np.arange(10)
+arr3 = np.column_stack((arr2, arr1))
 
-# values = np.random.uniform(low=0, high=1, size=2)
-# values = np.random.random_sample(5)
-# print(values)
-# merge = np.column_stack((index, values))
-# print(values)
 
+print(arr3[:, 0])

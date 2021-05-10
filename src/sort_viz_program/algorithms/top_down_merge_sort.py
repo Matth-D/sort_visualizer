@@ -75,7 +75,7 @@ class MergeSort:
         # self.sort_array[:, 0] = np.arange(len(self.sort_array))
         if not self.gui:
             return
-        self.signals.signal_sort_array.emit(self.sort_array)
+        self.signals.signal_sort_array.emit(self.sort_array[:, 1])
         self.iterations += 1
         self.signals.signal_iterations.emit(self.iterations)
         self.signals.signal_current.emit(x_data)
