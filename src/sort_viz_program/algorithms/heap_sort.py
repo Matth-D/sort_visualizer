@@ -31,9 +31,9 @@ class HeapSort:
 
         # Swap first and last elements
         for i in range(arr_len - 1, 0, -1):
-            self.sort_array[i][1], self.sort_array[0][1] = (
-                self.sort_array[0][1],
-                self.sort_array[i][1],
+            self.sort_array[i], self.sort_array[0] = (
+                self.sort_array[0],
+                self.sort_array[i],
             )
             self.update_sort_array(i)
             self.build_max_heap(self.sort_array, i, 0)
@@ -49,16 +49,16 @@ class HeapSort:
         if left > array_length or right > array_length:
             return
 
-        if left < array_length and in_arr[maxi][1] < in_arr[left][1]:
+        if left < array_length and in_arr[maxi] < in_arr[left]:
             maxi = left
 
-        if right < array_length and in_arr[maxi][1] < in_arr[right][1]:
+        if right < array_length and in_arr[maxi] < in_arr[right]:
             maxi = right
 
         if maxi != index:
-            in_arr[index][1], in_arr[maxi][1] = (
-                in_arr[maxi][1],
-                in_arr[index][1],
+            in_arr[index], in_arr[maxi] = (
+                in_arr[maxi],
+                in_arr[index],
             )
             self.update_sort_array(index)
             self.build_max_heap(in_arr, array_length, maxi)

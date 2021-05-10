@@ -68,7 +68,6 @@ class BinarySort:
             return self.binary_search(array, value, left, middle - 1)
 
     def insertion_sort(self, input_array):
-        input_array = input_array[:, 1]
 
         for i in range(1, len(input_array)):
             val = input_array[i]
@@ -83,7 +82,7 @@ class BinarySort:
             )
             input_array = merged_array
             self.sort_array = merged_array
-            self.sort_array = np.column_stack(
-                (np.array(range(len(self.sort_array))), self.sort_array)
-            )
+            # self.sort_array = np.column_stack(
+            #     (np.array(range(len(self.sort_array))), self.sort_array)
+            # )
             self.update_sort_array(index)

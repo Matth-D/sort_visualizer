@@ -58,10 +58,10 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
             density (int): Length of X data array.
         """
         self.input_array = core.create_array_random(density)
-        x_data = self.input_array[:, 0]
-        y_data = self.input_array[:, 1]
+        x_data = np.arange(density)
+        # y_data = self.input_array[:, 1]
         self.ax.clear()
-        self.bars = self.ax.bar(x_data, y_data, color="b")
+        self.bars = self.ax.bar(x_data, self.input_array, color="b")
         self.ax.axis("off")
         self.draw()
         self.update()
@@ -75,7 +75,7 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         """
         if not self.bars:
             return
-        y_data = sort_array[:, 1]
+        y_data = sort_array
         for i, elem in enumerate(self.bars):
             elem.set_height(y_data[i])
             # Update color of bar currently switched
@@ -163,7 +163,7 @@ class SortVisualizer(QtWidgets.QDialog):
         # Create Widgets
         self.main_layout = QtWidgets.QVBoxLayout()
 
-        default_density = 40
+        default_density = 10
         self.array_graph = ArrayGraph(self.algorithm_value, default_density)
         self.density_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal, self)
 

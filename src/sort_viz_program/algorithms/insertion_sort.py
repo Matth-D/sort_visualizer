@@ -36,10 +36,10 @@ class InsertionSort:
     def insertion_sort(self, sort_array):
 
         for i in range(1, len(sort_array)):
-            while sort_array[i][1] < sort_array[i - 1][1] and i > 0:
-                sort_array[i][1], sort_array[i - 1][1] = (
-                    sort_array[i - 1][1],
-                    sort_array[i][1],
+            while sort_array[i] < sort_array[i - 1] and i > 0:
+                sort_array[i], sort_array[i - 1] = (
+                    sort_array[i - 1],
+                    sort_array[i],
                 )
                 self.update_sort_array(i)
                 i -= 1

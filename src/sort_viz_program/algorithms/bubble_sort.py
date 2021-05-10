@@ -33,10 +33,10 @@ class BubbleSort:
         for i in range(len(self.input_array)):
             switch = False
             for j in range(0, len(self.input_array) - i - 1):
-                if self.sort_array[j][1] > self.sort_array[j + 1][1]:
-                    self.sort_array[j][1], self.sort_array[j + 1][1] = (
-                        self.sort_array[j + 1][1],
-                        self.sort_array[j][1],
+                if self.sort_array[j] > self.sort_array[j + 1]:
+                    self.sort_array[j], self.sort_array[j + 1] = (
+                        self.sort_array[j + 1],
+                        self.sort_array[j],
                     )
                     self.update_sort_array(j + 2)
                     switch = True

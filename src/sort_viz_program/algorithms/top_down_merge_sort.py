@@ -17,6 +17,8 @@ class MergeSort:
         self.time_complexity = "O(nlogn)"
         self.space_complexity = "O(n)"
         self.input_array = input_array
+        tmp_index = np.arange(len(self.input_array))
+        self.input_array = np.column_stack((tmp_index, self.input_array))
         self.sort_array = self.input_array.copy()
         self.solving = 0
         self.solved = 0
@@ -70,7 +72,7 @@ class MergeSort:
             x_data (int): Currently examined element's X value.
         """
         self.sort_array[left_index : right_index + 1] = slice_array
-        self.sort_array[:, 0] = np.arange(len(self.sort_array))
+        # self.sort_array[:, 0] = np.arange(len(self.sort_array))
         if not self.gui:
             return
         self.signals.signal_sort_array.emit(self.sort_array)
