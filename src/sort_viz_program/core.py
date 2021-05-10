@@ -22,9 +22,10 @@ def create_array_random(array_length):
     values = np.round(np.random.random_sample(array_length), decimals=3)
     merge = np.column_stack((index, values))
     return merge
+    # prouuuuut
+    # return values
 
 
-# array_length = 10
 # index = np.array(range(array_length))
 # # values = np.round(np.random.uniform(low=0, high=1), decimals=3)
 # values = np.random.uniform(low=0, high=1, size=array_length)
