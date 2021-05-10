@@ -18,12 +18,11 @@ def create_array_random(array_length):
     if not isinstance(array_length, int):
         print("Length parameter must be integer")
         return None
-    index = np.array(range(array_length))
+    # index = np.array(range(array_length))
     values = np.round(np.random.random_sample(array_length), decimals=3)
-    merge = np.column_stack((index, values))
-    return merge
-    # prouuuuut
-    # return values
+    # merge = np.column_stack((index, values))
+    return values
+    # return merge
 
 
 # index = np.array(range(array_length))
