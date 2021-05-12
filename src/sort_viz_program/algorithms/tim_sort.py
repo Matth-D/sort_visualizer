@@ -13,5 +13,5 @@
 #         self.solved = 0
 #         self.iterations = 0
 
-# TIM SORT PSEUDOCODE
+TIM SORT NOTES
 
