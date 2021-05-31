@@ -99,8 +99,10 @@ arr1 = np.array([5, 1, 2, 9, 6])
 arr2 = np.arange(len(arr1))
 arr3 = np.column_stack((arr1, arr2))
 add = arr3[0]
+add = add.reshape(-1, 2)
 
-stack = [arr3]
-print(stack, type(stack))
-stack = stack.append(3)
-print(stack, type(stack))
+list1 = np.array([])
+
+list1 = np.append(list1, add)
+list1 = np.append(list1, arr3)
+print(list1)
