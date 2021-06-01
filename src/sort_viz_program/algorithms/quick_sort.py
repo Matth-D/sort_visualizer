@@ -76,6 +76,7 @@ class QuickSort:
         index_split = random.randint(0, len(input_array) - 1)
         # pivot = np.reshape(pivot, (1, 2))
         # TODO:finish impletementing random index in numpy with array slicing
+        split_array = np.hstack()
         smaller = input_array[1:][(input_array[1:][:, 1] < pivot[1])]
         greater = input_array[1:][(input_array[1:][:, 1] >= pivot[1])]
 
@@ -121,3 +122,10 @@ class QuickSort:
 # list1 = np.append(list1, add)
 # list1 = np.append(list1, arr3)
 # print(list1)
+arr1 = np.array([0, 1, 2, 3, 4, 5])
+index = 4
+
+# print(arr1[0])
+without = np.hstack((arr1[0:index], arr1[index + 1 : len(arr1)]))
+
+print(without)
