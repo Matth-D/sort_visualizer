@@ -26,8 +26,9 @@ def quicksort(input_array):
 
 # quicksort(array)
 
-import numpy as np
 import random
+
+import numpy as np
 
 # from . import algo_utils
 
@@ -74,11 +75,23 @@ class QuickSort:
 
         pivot = input_array[0]
         index_split = random.randint(0, len(input_array) - 1)
-        # pivot = np.reshape(pivot, (1, 2))
-        # TODO:finish impletementing random index in numpy with array slicing
-        split_array = np.hstack()
-        smaller = input_array[1:][(input_array[1:][:, 1] < pivot[1])]
-        greater = input_array[1:][(input_array[1:][:, 1] >= pivot[1])]
+        without = self.concat_arrays(
+            input_array[0:index_split], input_array[index_split + 1 : len(input_array)]
+        )
+        print(index_split)
+        print(without)
+        # split_array = np.column_stack(
+        #     (
+        #         input_array[0:index_split],
+        #         input_array[index_split + 1 : len(input_array)],
+        #     )
+        # )
+        # print(split_array)
+        # print(input_array)
+        # print(index_split)
+        # print(split_array)
+        # smaller = input_array[1:][(input_array[1:][:, 1] < pivot[1])]
+        # greater = input_array[1:][(input_array[1:][:, 1] >= pivot[1])]
 
         # if self.gui:
         #     min_index = input_array[0][0]
@@ -101,19 +114,24 @@ class QuickSort:
         # print(np.hstack((self.quicksort(smaller), pivot, self.quicksort(greater))))
         # return np.hstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
 
+    def concat_arrays(self, arr1, arr2):
+        if arr1.size == 0:
+            return arr2
+        if arr2.size == 0:
+            return arr1
 
-# array = np.array([5, 1, 2, 9, 6])
-# algo = QuickSort(array, gui=True)
-# algo.solve()
+        return np.vstack((arr1, arr2))
+
+
+array = np.array([5, 1, 2, 9, 6])
+algo = QuickSort(array, gui=True)
+algo.solve()
 
 # arr1 = np.array([3, 4])
 # arr2 = np.array([1, 2])
 
 # TODO: find how to slice 2d array based on condition
 
-# arr1 = np.array([5, 1, 2, 9, 6])
-# arr2 = np.arange(len(arr1))
-# arr3 = np.column_stack((arr1, arr2))
 # add = arr3[0]
 # add = add.reshape(-1, 2)
 
@@ -122,10 +140,13 @@ class QuickSort:
 # list1 = np.append(list1, add)
 # list1 = np.append(list1, arr3)
 # print(list1)
-arr1 = np.array([0, 1, 2, 3, 4, 5])
-index = 4
+# arr1 = np.array([0, 1, 2, 3, 4, 5])
+# index = 4
 
 # print(arr1[0])
-without = np.hstack((arr1[0:index], arr1[index + 1 : len(arr1)]))
+# without = np.hstack((arr1[0:index], arr1[index + 1 : len(arr1)]))
 
-print(without)
+# print(without)
+
+# arr1 = np.array([3, 7, 2])
+# arr2 = np.array([5, 1, 2])
