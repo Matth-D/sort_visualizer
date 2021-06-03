@@ -73,44 +73,14 @@ class QuickSort:
         if len(input_array) < 2:
             return input_array
 
-        pivot = input_array[0]
-        index_split = random.randint(0, len(input_array) - 1)
-        without = self.concat_arrays(
-            input_array[0:index_split], input_array[index_split + 1 : len(input_array)]
+        index_pivot = random.randint(0, len(input_array) - 1)
+        pivot = input_array[index_pivot]
+        no_pivot = self.concat_arrays(
+            input_array[0:index_pivot], input_array[index_pivot + 1 : len(input_array)]
         )
-        print(index_split)
-        print(without)
-        # split_array = np.column_stack(
-        #     (
-        #         input_array[0:index_split],
-        #         input_array[index_split + 1 : len(input_array)],
-        #     )
-        # )
-        # print(split_array)
-        # print(input_array)
-        # print(index_split)
-        # print(split_array)
-        # smaller = input_array[1:][(input_array[1:][:, 1] < pivot[1])]
-        # greater = input_array[1:][(input_array[1:][:, 1] >= pivot[1])]
+        smaller = no_pivot[(no_pivot[:, 1] < pivot[1])]
+        greater = no_pivot[(no_pivot[:, 1] >= pivot[1])]
 
-        # if self.gui:
-        #     min_index = input_array[0][0]
-        #     max_index = input_array[-1][0]
-
-        #     smaller[:, 0] = np.arange(min_index, len(smaller))
-        #     pivot[0] = len(smaller)
-        #     greater[:, 0] = np.arange(len(smaller) + 1, max_index + 1)
-
-        # if smaller.size:
-        #     stack = stack.append(smaller)
-        # if greater.size:
-        #     stack = stack.append(greater)
-
-        # print(pivot)
-        # print(smaller)
-        # print(greater)
-
-        # pivot = np.reshape(pivot, (1, 2))
         # print(np.hstack((self.quicksort(smaller), pivot, self.quicksort(greater))))
         # return np.hstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
 
@@ -126,27 +96,3 @@ class QuickSort:
 array = np.array([5, 1, 2, 9, 6])
 algo = QuickSort(array, gui=True)
 algo.solve()
-
-# arr1 = np.array([3, 4])
-# arr2 = np.array([1, 2])
-
-# TODO: find how to slice 2d array based on condition
-
-# add = arr3[0]
-# add = add.reshape(-1, 2)
-
-# list1 = np.array([])
-
-# list1 = np.append(list1, add)
-# list1 = np.append(list1, arr3)
-# print(list1)
-# arr1 = np.array([0, 1, 2, 3, 4, 5])
-# index = 4
-
-# print(arr1[0])
-# without = np.hstack((arr1[0:index], arr1[index + 1 : len(arr1)]))
-
-# print(without)
-
-# arr1 = np.array([3, 7, 2])
-# arr2 = np.array([5, 1, 2])
