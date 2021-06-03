@@ -81,8 +81,7 @@ class QuickSort:
         smaller = no_pivot[(no_pivot[:, 1] < pivot[1])]
         greater = no_pivot[(no_pivot[:, 1] >= pivot[1])]
 
-        # print(np.hstack((self.quicksort(smaller), pivot, self.quicksort(greater))))
-        # return np.hstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
+        return self.recur_quicksort(smaller, pivot, greater)
 
     def concat_arrays(self, arr1, arr2):
         if arr1.size == 0:
@@ -91,6 +90,14 @@ class QuickSort:
             return arr1
 
         return np.vstack((arr1, arr2))
+
+    def recur_quicksort(self, smaller, pivot, greater):
+        if smaller.size == 0:
+            return np.vstack((pivot, self.quicksort(greater)))
+        if greater.size == 0:
+            return np.vstack((self.quicksort(smaller), (pivot)))
+        else:
+            return np.vstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
 
 
 array = np.array([5, 1, 2, 9, 6])
