@@ -64,19 +64,20 @@ class QuickSort:
 
         self.solving = 1
 
-        self.quicksort(self.input_array)
+        self.sort_array = self.quicksort(self.input_array)
 
         self.solving = 0
         self.solved = 1
 
     def quicksort(self, input_array):
-        if len(input_array) < 2:
+        size_input = len(input_array)
+        if size_input < 2:
             return input_array
 
-        index_pivot = random.randint(0, len(input_array) - 1)
+        index_pivot = random.randint(0, size_input - 1)
         pivot = input_array[index_pivot]
         no_pivot = self.concat_arrays(
-            input_array[0:index_pivot], input_array[index_pivot + 1 : len(input_array)]
+            input_array[0:index_pivot], input_array[index_pivot + 1 : size_input]
         )
         smaller = no_pivot[(no_pivot[:, 1] < pivot[1])]
         greater = no_pivot[(no_pivot[:, 1] >= pivot[1])]
@@ -92,14 +93,24 @@ class QuickSort:
         return np.vstack((arr1, arr2))
 
     def recur_quicksort(self, smaller, pivot, greater):
+        # print(smaller)
+        # print(greater)
         if smaller.size == 0:
             return np.vstack((pivot, self.quicksort(greater)))
-        if greater.size == 0:
-            return np.vstack((self.quicksort(smaller), (pivot)))
+        elif greater.size == 0:
+            return np.vstack((self.quicksort(smaller), pivot))
         else:
             return np.vstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
+
+        # if smaller.size == 0:
+        #     return np.vstack((pivot, self.quicksort(greater)))
+        # elif greater.size == 0:
+        #     return np.vstack((self.quicksort(smaller), (pivot)))
+        # else:
+        #     return np.vstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
 
 
 array = np.array([5, 1, 2, 9, 6])
 algo = QuickSort(array, gui=True)
 algo.solve()
+print(algo.sort_array)

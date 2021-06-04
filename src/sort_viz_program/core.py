@@ -23,11 +23,3 @@ def create_array_random(array_length):
     # merge = np.column_stack((index, values))
     return values
     # return merge
-
-
-arr1 = create_array_random(10)
-arr2 = np.arange(10)
-arr3 = np.column_stack((arr2, arr1))
-
-
-print(arr3[:, 0])

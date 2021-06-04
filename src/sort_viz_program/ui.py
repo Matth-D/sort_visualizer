@@ -14,9 +14,6 @@ from .algorithms import (
     top_down_merge_sort,
 )
 
-# TODO: MAYBE CREATE A GUI SWITCH ON ALGORITHM IF WE WANT THEM TO WORK WITH GUI OR ON THEIR OWN.
-# THINKING OF IMPORTING EXISTING INSERTION SORT AND MERGE SORT INTO EXECUTION OF TIMSORT.?
-
 
 class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
     """Class containing random array sorting display.
@@ -281,8 +278,8 @@ class SortVisualizer(QtWidgets.QDialog):
         self.sender().valueChanged.disconnect()
 
     def slider_reconnect(self):
-        """Reconnect slider signal when button is released to"""
-        """Graph isn't cooked at every slider scroll."""
+        """Reconnect slider signal when button is released to
+        Graph isn't cooked at every slider scroll."""
         self.sender().valueChanged.connect(self.slider_changed)
         self.sender().valueChanged.emit(self.sender().value())
 
