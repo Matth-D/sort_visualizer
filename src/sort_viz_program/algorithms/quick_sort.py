@@ -70,6 +70,9 @@ class QuickSort:
         self.solved = 1
 
     def quicksort(self, input_array):
+        first_i = input_array[0][0]
+        last_i = input_array[-1][0]
+
         size_input = len(input_array)
         if size_input < 2:
             return input_array
@@ -82,6 +85,11 @@ class QuickSort:
         smaller = no_pivot[(no_pivot[:, 1] < pivot[1])]
         greater = no_pivot[(no_pivot[:, 1] >= pivot[1])]
 
+        # Set index values
+        smaller[:, 0] = np.arange(first_i, len(smaller))
+        pivot[0] = len(smaller)
+        greater[:, 0] = np.arange(len(smaller) + 1, last_i + 1)
+
         return self.recur_quicksort(smaller, pivot, greater)
 
     def concat_arrays(self, arr1, arr2):
@@ -93,8 +101,6 @@ class QuickSort:
         return np.vstack((arr1, arr2))
 
     def recur_quicksort(self, smaller, pivot, greater):
-        # print(smaller)
-        # print(greater)
         if smaller.size == 0:
             return np.vstack((pivot, self.quicksort(greater)))
         elif greater.size == 0:
@@ -102,15 +108,9 @@ class QuickSort:
         else:
             return np.vstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
 
-        # if smaller.size == 0:
-        #     return np.vstack((pivot, self.quicksort(greater)))
-        # elif greater.size == 0:
-        #     return np.vstack((self.quicksort(smaller), (pivot)))
-        # else:
-        #     return np.vstack((self.quicksort(smaller), pivot, self.quicksort(greater)))
-
 
 array = np.array([5, 1, 2, 9, 6])
 algo = QuickSort(array, gui=True)
 algo.solve()
-print(algo.sort_array)
+
+# TODO: Range is done just need to implement signal + update sort array
