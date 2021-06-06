@@ -11,7 +11,8 @@ from .algorithms import (
     bubble_sort,
     heap_sort,
     insertion_sort,
-    top_down_merge_sort,
+    merge_sort,
+    quick_sort,
 )
 
 
@@ -104,10 +105,8 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
         self.algorithm_value = value
         algorithm_arg = [self.input_array]
         algorithm_kwargs = {"gui": True}
-        if self.algorithm_value == "Top Down Merge Sort":
-            self.algorithm = top_down_merge_sort.MergeSort(
-                *algorithm_arg, **algorithm_kwargs
-            )
+        if self.algorithm_value == "Merge Sort":
+            self.algorithm = merge_sort.MergeSort(*algorithm_arg, **algorithm_kwargs)
         if self.algorithm_value == "Bubble Sort":
             self.algorithm = bubble_sort.BubbleSort(*algorithm_arg, **algorithm_kwargs)
         if self.algorithm_value == "Heap Sort":
@@ -118,6 +117,8 @@ class ArrayGraph(beqt5agg.FigureCanvasQTAgg):
             )
         if self.algorithm_value == "Binary Sort":
             self.algorithm = binary_sort.BinarySort(*algorithm_arg, **algorithm_kwargs)
+        if self.algorithm_value == "Quick Sort":
+            self.algorithm = quick_sort.QuickSort(*algorithm_arg, **algorithm_kwargs)
 
         self.update_signal_source()
 
@@ -137,9 +138,10 @@ class SortVisualizer(QtWidgets.QDialog):
         """Sort Visualizer class init."""
         super(SortVisualizer, self).__init__()
         self.algorithms_list = [
-            "Top Down Merge Sort",
+            "Merge Sort",
             "Bubble Sort",
             "Heap Sort",
+            "Quick Sort",
             "Insertion Sort",
             "Binary Sort",
             "Tim Sort",
