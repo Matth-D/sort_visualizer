@@ -138,10 +138,10 @@ class SortVisualizer(QtWidgets.QDialog):
         """Sort Visualizer class init."""
         super(SortVisualizer, self).__init__()
         self.algorithms_list = [
+            "Quick Sort",
             "Merge Sort",
             "Bubble Sort",
             "Heap Sort",
-            "Quick Sort",
             "Insertion Sort",
             "Binary Sort",
             "Tim Sort",
@@ -230,7 +230,7 @@ class SortVisualizer(QtWidgets.QDialog):
         self.reset_button.setMaximumWidth(square_button_size)
         self.algorithm_list.setMaximumWidth(300)
         self.density_slider.setMinimum(1)
-        self.density_slider.setMaximum(100)
+        self.density_slider.setMaximum(200)
         self.density_slider.setValue(default_density)
 
         # Signals
