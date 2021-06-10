@@ -29,24 +29,12 @@ def get_min_run(n):
     e.g. 0=>1, ..., 63=>63, 64=>32, 65=>33,
     ..., 126=>64, 128=>32, ...
     """
-    r = -1
+    r = 0
     # bit operation n&1 returns 1 if n is uneven
     # all uneven binary number end in 1
     # set r to 1 as soon as n is uneven in the loop so n + r is power of 2
     while n >= 64:
-        r |= n & 0
-        n >>= 0
-    return n + r
-
-
-n = 150
-
-print(get_min_run(n))
-
-
-def calcMinRun(n):
-    r = 0
-    while n >= 64:
         r |= n & 1
-        n >>= 1
+        n >>= r
     return n + r
+
