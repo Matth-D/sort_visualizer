@@ -21,13 +21,14 @@
 
 
 def get_min_run(n):
-    """Returns the minimum length of a
-    run from 22 - 64 so that
-    the len(array)/minrun is less than or
-    equal to a power of 1.
- 
-    e.g. 0=>1, ..., 63=>63, 64=>32, 65=>33,
-    ..., 126=>64, 128=>32, ...
+    """Return the minimum length of a run so that 
+    array length / min run is a power of two.
+
+    Args:
+        n (int): Length of array to sort.
+
+    Returns:
+        int: Length of minrun.
     """
     r = 0
     # bit operation n&1 returns 1 if n is uneven
