@@ -39,3 +39,10 @@ def get_min_run(n):
         n >>= r
     return n + r
 
+
+U = 2350
+minrun = get_min_run(U)
+
+ratio = U / minrun
+
+print(minrun, ratio)
